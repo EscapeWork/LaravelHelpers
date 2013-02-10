@@ -1,6 +1,6 @@
-<?php namespace EscapeWork\LaravelHelpers\Eloquent;
+<?php namespace EscapeWork\LaravelHelpers;
 
-use namespace Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\Model as Model;
 
 class Eloquent extends Model
 {
