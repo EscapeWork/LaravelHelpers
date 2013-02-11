@@ -40,7 +40,9 @@ class Eloquent extends Model
      */
     public static function getDataFromArray(array $data)
     {
-        $object = new get_called_class();
+        $class = get_called_class();
+
+        $object = new $class;
 
         foreach( $data as $attribute => $value )
         {
