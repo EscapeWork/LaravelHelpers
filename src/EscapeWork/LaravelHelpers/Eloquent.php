@@ -11,7 +11,7 @@ class Eloquent extends Model
     public static $validationMessages = array();
 
     # mensagens das validações
-    public static $messages;
+    public static $messages = array();
 
     /**
      * Método de valicação
@@ -29,7 +29,6 @@ class Eloquent extends Model
 
         return true;
     }
-
 
     /**
      * putting data in a Object and returning it
@@ -51,5 +50,4 @@ class Eloquent extends Model
 
         return $object;
     }
-
 }
