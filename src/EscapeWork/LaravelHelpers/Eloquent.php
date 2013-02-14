@@ -59,14 +59,14 @@ class Eloquent extends Model
      * @param   $id    int [com o ID atual]
      * @return  string [HTML Select]
      */
-    public static function HTMLOptions( $id, $field = 'title' )
+    public static function HTMLOptions( $id = null, $field = 'title' )
     {
         $all  = static::all();
         $html = '';
 
         foreach( $all as $item )
         {
-            $html .= '<option value="'.$item->id.'">'.$item->$field.'</option>';
+            $html .= '<option value="'.$item->id.'" '.( $id == $item->id ? 'selected="selected"' : null ).'>'.$item->$field.'</option>';
         }
 
         return $html;
