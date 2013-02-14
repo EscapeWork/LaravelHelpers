@@ -51,4 +51,32 @@ class Eloquent extends Model
 
         return $object;
     }
+
+    /**
+     * Gerando um HTML Select com TODAS as opções
+     *
+     * @access  public 
+     * @param   $id    int [com o ID atual]
+     * @return  string [HTML Select]
+     */
+    public static function HTMLSelect( $id, $field = 'title', $name = null )
+    {
+        $all  = static::all();
+
+        if( is_null( $name ) )
+        {
+            $name = strtolower( get_called_class() ) . '_id';
+        }
+
+        $html = '<select name="'.$name.'" id="'.$name.'">';
+
+        foreach( $all as $item )
+        {
+            $html .= '<option value="'.$item->id.'">'.$item->$field.'</option>';
+        }
+
+        $html .= '</select>';
+
+        return $html;
+    }
 }
