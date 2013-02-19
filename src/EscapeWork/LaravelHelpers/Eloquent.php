@@ -72,10 +72,23 @@ class Eloquent extends Model
         return $html;
     }
 
+    public static function formatSlug( $update = false, $title = 'title', $slug = 'slug' )
+    {
+        $count       = 0;
+        $this->$slug = static::formatString( $this->$title );
+
+        while( !is_null( $object = static::where($slug, '=', $this->$slug)->first() ) )
+        {
+            $count++;
+
+            $this->$slug = static::formatString( $this->$title . '-' . $count );
+        }
+    }
+
     /**
      * Formatando o slug
      */
-    public static function formatSlug( $var, $removerPonto = true, $enc = 'UTF-8' )
+    public static function formatString( $string, $enc = 'UTF-8' )
     {
         $acentos = array(
             'a' => '/&Agrave;|&Aacute;|&Acirc;|&Atilde;|&Auml;|&Aring;/',
@@ -98,15 +111,15 @@ class Eloquent extends Model
 
         $especiais = array('/', '\\', '|', '*', ':', '[', ']', '{', '}', "'", '"', ',', '%', '@', '&', '(', ')', '¬', '#', '!', '?', 'ª', 'º', '¨', '°', '.');
         
-        $var = str_replace($especiais, '', $var);
-        $var = preg_replace($acentos, array_keys($acentos), htmlentities($var, ENT_NOQUOTES, $enc));
-        $var = trim( $var );
-        $var = str_replace(' ', '-', $var);
-        $var = str_replace('---', '-', str_replace(' ', '-', $var));
-        $var = str_replace('_', '-', str_replace('--', '-', $var));
-        $var = mb_strtolower($var, $enc);
-        $var = preg_replace($acentos, array_keys($acentos), $var);
+        $string = str_replace($especiais, '', $string);
+        $string = preg_replace($acentos, array_keys($acentos), htmlentities($string, ENT_NOQUOTES, $enc));
+        $string = trim( $string );
+        $string = str_replace(' ', '-', $string);
+        $string = str_replace('---', '-', str_replace(' ', '-', $string));
+        $string = str_replace('_', '-', str_replace('--', '-', $string));
+        $string = mb_strtolower($string, $enc);
+        $string = preg_replace($acentos, array_keys($acentos), $string);
 
-        return $var;
+        $this->$field = $string;
     }
 }

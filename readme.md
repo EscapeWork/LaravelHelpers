@@ -37,6 +37,7 @@ class UserTest extends TestCase
         $this->assertTrue( User::validate( $fields ) );
     }
 }
+```
 
 ### Slug
 
