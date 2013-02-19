@@ -72,7 +72,7 @@ class Eloquent extends Model
         return $html;
     }
 
-    public static function formatSlug( $update = false, $title = 'title', $slug = 'slug' )
+    public function formatSlug( $update = false, $title = 'title', $slug = 'slug' )
     {
         $count       = 0;
         $this->$slug = static::formatString( $this->$title );
