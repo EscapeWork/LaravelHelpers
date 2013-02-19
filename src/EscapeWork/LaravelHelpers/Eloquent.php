@@ -120,6 +120,6 @@ class Eloquent extends Model
         $string = mb_strtolower($string, $enc);
         $string = preg_replace($acentos, array_keys($acentos), $string);
 
-        $this->$field = $string;
+        return $string;
     }
 }
