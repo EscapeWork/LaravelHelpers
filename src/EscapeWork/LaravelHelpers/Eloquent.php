@@ -79,7 +79,7 @@ class Eloquent extends Model
      */
     public static function create(array $attributes)
     {
-        Event::fire(get_called_class() . '.create');
+        Event::fire(get_called_class() . '.change', array('type' => 'create'));
 
         return parent::create($attributes);
     }
@@ -89,7 +89,7 @@ class Eloquent extends Model
      */
     public function update(array $attributes = array())
     {
-        Event::fire(get_called_class() . '.update');
+        Event::fire(get_called_class() . '.change', array('type' => 'update'));
 
         return parent::update($attributes);
     }
@@ -99,7 +99,7 @@ class Eloquent extends Model
      */
     public function save()
     {
-        Event::fire(get_called_class() . '.save');
+        Event::fire(get_called_class() . '.change', array('type' => 'save'));
 
         return parent::save();
     }
@@ -109,7 +109,7 @@ class Eloquent extends Model
      */
     public function delete()
     {
-        Event::fire(get_called_class() . '.delete');
+        Event::fire(get_called_class() . '.change', array('type' => 'delete'));
 
         return parent::delete();
     }
