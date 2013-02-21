@@ -39,15 +39,14 @@ class UserTest extends TestCase
 }
 ```
 
-### Slug
+### Eventos
 
-Para criar um slug de um título ou algum outro atributo, utilize a função `formatSlug()`;
+Comming soon.
 
-```php
-$fields = [
-    'title' => Input::get('title')
-    'slug'  => Brand::formatSlug( Input::get('title') )
-];
+***
 
-Brand::create( $fields );
-```
+### Populando o objeto por um array
+
+Comming soon.
+
+***

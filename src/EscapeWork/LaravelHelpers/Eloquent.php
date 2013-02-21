@@ -41,10 +41,13 @@ class Eloquent extends Model
      * @param  array  $data 
      * @return Object
      */
-    public static function getDataFromArray(array $data)
+    public static function getDataFromArray(array $data, $object = null)
     {
-        $class = get_called_class();
-        $object = new $class;
+        if( is_null( $object ) )
+        {
+            $class  = get_called_class();
+            $object = new $class;
+        }
 
         foreach( $data as $attribute => $value )
         {
@@ -75,21 +78,11 @@ class Eloquent extends Model
     }
 
     /**
-     * Reescrevendo a função Model::create para disparar um evento ao inserir
-     */
-    public static function create(array $attributes)
-    {
-        Event::fire(get_called_class() . '.change', array('type' => 'create'));
-
-        return parent::create($attributes);
-    }
-
-    /**
      * Reescrevendo a função Model::update para disparar um evento ao update
      */
     public function update(array $attributes = array())
     {
-        Event::fire(get_called_class() . '.change', array('type' => 'update'));
+        Event::fire(get_called_class() . '.change', array('update'));
 
         return parent::update($attributes);
     }
@@ -99,7 +92,7 @@ class Eloquent extends Model
      */
     public function save()
     {
-        Event::fire(get_called_class() . '.change', array('type' => 'save'));
+        Event::fire(get_called_class() . '.change', array('save'));
 
         return parent::save();
     }
@@ -109,7 +102,7 @@ class Eloquent extends Model
      */
     public function delete()
     {
-        Event::fire(get_called_class() . '.change', array('type' => 'delete'));
+        Event::fire(get_called_class() . '.change', array('delete'));
 
         return parent::delete();
     }
