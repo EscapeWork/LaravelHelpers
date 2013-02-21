@@ -2,9 +2,11 @@
 
 use Illuminate\Database\Eloquent\Model as Model;
 use \Validator;
+use \Event;
 
 class Eloquent extends Model
 {
+
     # regras de validações
     public static $validationRules = array();
 
@@ -41,7 +43,6 @@ class Eloquent extends Model
     public static function getDataFromArray(array $data)
     {
         $class = get_called_class();
-
         $object = new $class;
 
         foreach( $data as $attribute => $value )
@@ -72,54 +73,43 @@ class Eloquent extends Model
         return $html;
     }
 
-    public function formatSlug( $update = false, $title = 'title', $slug = 'slug' )
+    /**
+     * Reescrevendo a função Model::create para disparar um evento ao inserir
+     */
+    public static function create(array $attributes)
     {
-        $count       = 0;
-        $this->$slug = static::formatString( $this->$title );
+        Event::fire(get_called_class() . '.create');
 
-        while( !is_null( $object = static::where($slug, '=', $this->$slug)->first() ) )
-        {
-            $count++;
-
-            $this->$slug = static::formatString( $this->$title . '-' . $count );
-        }
+        return parent::create($attributes);
     }
 
     /**
-     * Formatando o slug
+     * Reescrevendo a função Model::update para disparar um evento ao update
      */
-    public static function formatString( $string, $enc = 'UTF-8' )
+    public function update(array $attributes = array())
     {
-        $acentos = array(
-            'a' => '/&Agrave;|&Aacute;|&Acirc;|&Atilde;|&Auml;|&Aring;/',
-            'a' => '/&agrave;|&aacute;|&acirc;|&atilde;|&auml;|&aring;/',
-            'c' => '/&Ccedil;/',
-            'c' => '/&ccedil;/',
-            'e' => '/&Egrave;|&Eacute;|&Ecirc;|&Euml;/',
-            'e' => '/&egrave;|&eacute;|&ecirc;|&euml;/',
-            'i' => '/&Igrave;|&Iacute;|&Icirc;|&Iuml;/',
-            'i' => '/&igrave;|&iacute;|&icirc;|&iuml;/',
-            'n' => '/&Ntilde;/',
-            'n' => '/&ntilde;/',
-            'o' => '/&Ograve;|&Oacute;|&Ocirc;|&Otilde;|&Ouml;/',
-            'o' => '/&ograve;|&oacute;|&ocirc;|&otilde;|&ouml;/',
-            'u' => '/&Ugrave;|&Uacute;|&Ucirc;|&Uuml;/',
-            'u' => '/&ugrave;|&uacute;|&ucirc;|&uuml;/',
-            'y' => '/&Yacute;|&Yuml;/',
-            'y' => '/&yacute;|&yuml;/'
-        );
+        Event::fire(get_called_class() . '.update');
 
-        $especiais = array('/', '\\', '|', '*', ':', '[', ']', '{', '}', "'", '"', ',', '%', '@', '&', '(', ')', '¬', '#', '!', '?', 'ª', 'º', '¨', '°', '.');
-        
-        $string = str_replace($especiais, '', $string);
-        $string = preg_replace($acentos, array_keys($acentos), htmlentities($string, ENT_NOQUOTES, $enc));
-        $string = trim( $string );
-        $string = str_replace(' ', '-', $string);
-        $string = str_replace('---', '-', str_replace(' ', '-', $string));
-        $string = str_replace('_', '-', str_replace('--', '-', $string));
-        $string = mb_strtolower($string, $enc);
-        $string = preg_replace($acentos, array_keys($acentos), $string);
+        return parent::update($attributes);
+    }
 
-        return $string;
+    /**
+     * Reescrevendo a função Model::save para disparar um evento ao deletar
+     */
+    public function save()
+    {
+        Event::fire(get_called_class() . '.save');
+
+        return parent::save();
+    }
+
+    /**
+     * Reescrevendo a função Model::delete para disparar um evento ao excluir
+     */
+    public function delete()
+    {
+        Event::fire(get_called_class() . '.delete');
+
+        return parent::delete();
     }
 }
