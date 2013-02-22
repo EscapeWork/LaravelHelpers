@@ -64,9 +64,9 @@ class Eloquent extends Model
      * @param   $id    int [com o ID atual]
      * @return  string [HTML Select]
      */
-    public static function HTMLOptions( $id = null, $field = 'title' )
+    public static function HTMLOptions( $id = null, $field = 'title', $all = null )
     {
-        $all  = static::all();
+        $all  = is_null( $all ) ? static::all() : $all;
         $html = '';
 
         foreach( $all as $item )
