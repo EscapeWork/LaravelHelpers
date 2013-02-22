@@ -1,4 +1,16 @@
-# LaravelHelpers
+# LaravelHelpers (Beta)
+
+### Instalação
+
+A instalação está disponível via [Composer](https://packagist.org/packages/escapework/laravelhelpers). Autoload compátivel com a PSR-0.
+
+```
+{
+    "require": {
+        "escapework/laravelhelpers": "0.1.*"
+    }
+}
+```
 
 ### Configuração
 
@@ -38,6 +50,20 @@ class UserTest extends TestCase
     }
 }
 ```
+
+### HTML Options
+
+```php
+<select>
+    {{ Brand::HTMLOptions() }}
+</select>
+
+<select>
+    {{ User::HTMLOptions(2, 'name', User::getAdministrators()) }}
+</select>
+```
+
+***
 
 ### Eventos
 
