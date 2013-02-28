@@ -49,7 +49,8 @@ class Eloquent extends Model
             $object = new $class;
         }
 
-        return $object->setDataFromArray( $data );
+        $object->setDataFromArray( $data );
+        return $object;
     }
 
     public function setDataFromArray(array $data)
