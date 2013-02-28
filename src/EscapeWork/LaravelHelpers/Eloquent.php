@@ -34,24 +34,6 @@ class Eloquent extends Model
         return true;
     }
 
-    /**
-     * putting data in a Object and returning it
-     *
-     * @static
-     * @param  array  $data 
-     * @return Object
-     */
-    public static function getDataFromArray(array $data, $object = null)
-    {
-        if( is_null( $object ) )
-        {
-            $class  = get_called_class();
-            $object = new $class;
-        }
-
-        $object->setDataFromArray( $data );
-        return $object;
-    }
 
     public function setDataFromArray(array $data)
     {
