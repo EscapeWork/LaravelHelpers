@@ -49,12 +49,15 @@ class Eloquent extends Model
             $object = new $class;
         }
 
+        return $object->setDataFromArray( $data );
+    }
+
+    public function setDataFromArray(array $data)
+    {
         foreach( $data as $attribute => $value )
         {
-            $object->$attribute = $value;
+            $this->$attribute = $value;
         }
-
-        return $object;
     }
 
     /**
