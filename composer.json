@@ -31,7 +31,10 @@
     "autoload": {
         "psr-0": {
             "EscapeWork": "src"
-        }
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
     }, 
 
     "config": {

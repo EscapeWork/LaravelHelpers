@@ -52,3 +52,35 @@ function to_char($datetime, $format = 'd/m/Y H:i')
 {
     return (new DateTime($datetime))->format($format);
 }
+
+
+
+/**
+ * Formatando uma string de tempo para real
+ * @param  string $value
+ * @return real           
+ * @author  Eduardo Kasper <eduardo@escape.ppg.br>
+ */
+function time_to_real($value)
+{
+    $value   = explode(':', $value);
+    $hora    = $value[0];
+    $minutos = $value[1];
+
+    return (float)($hora + ($minutos /60));
+}
+
+
+/**
+ * Formatando um valor real para ser tempo
+ * @param   float $value
+ * @return  string           
+ * @author  Eduardo Kasper <eduardo@escape.ppg.br>
+ */
+function real_to_time($value)
+{
+    $hora = intval($value);
+    $minuto = $value - $hora;
+
+    return ($hora < 10 ? '0' + $hora : $hora) . ':' . ($minuto * 60);
+}
