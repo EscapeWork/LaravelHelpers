@@ -37,6 +37,11 @@ function d($value)
  */
 function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
 {
+    if( $timestamp === null )
+    {
+        return null;
+    }
+
     return DateTime::createFromFormat($formatFrom, $timestamp)->format('Y-m-d H:i');
 }
 
@@ -50,6 +55,11 @@ function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
  */
 function to_char($datetime, $format = 'd/m/Y H:i')
 {
+    if( $datetime === null )
+    {
+        return null;
+    }
+
     return (new DateTime($datetime))->format($format);
 }
 
@@ -63,6 +73,11 @@ function to_char($datetime, $format = 'd/m/Y H:i')
  */
 function time_to_real($value)
 {
+    if( $value === null )
+    {
+        return null;
+    }
+
     $value   = explode(':', $value);
     $hora    = $value[0];
     $minutos = $value[1];
@@ -79,6 +94,11 @@ function time_to_real($value)
  */
 function real_to_time($value)
 {
+    if( $value === null )
+    {
+        return null;
+    }
+
     $hora = intval($value);
     $minuto = $value - $hora;
 
