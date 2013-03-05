@@ -1,9 +1,7 @@
 {
     "name": "escapework/laravelhelpers", 
     "description": "Modificações no frameWork do Laravel para melhorar alguns workflows", 
-    "version": "0.1.1", 
     "type": "library", 
-    "homepage": "", 
     "license": "MIT", 
 
     "authors": [
@@ -30,7 +28,7 @@
 
     "autoload": {
         "psr-0": {
-            "EscapeWork": "src"
+            "EscapeWork\\LaravelHelpers": "src"
         }, 
 
         "files": [

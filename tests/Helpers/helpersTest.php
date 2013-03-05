@@ -1,5 +1,8 @@
 <?php
 
+include_once('./src/Helpers/helpers.php');
+
+
 class helpersTest extends \PHPUnit_Framework_TestCase {
 
 
@@ -29,6 +32,7 @@ class helpersTest extends \PHPUnit_Framework_TestCase {
     public function testRealToTime()
     {
         $str = 1;
+
         $this->assertEquals(real_to_time($str), '01:00');
 
         $str = 1.5;
@@ -39,6 +43,22 @@ class helpersTest extends \PHPUnit_Framework_TestCase {
 
         $str = 20000000;
         $this->assertEquals(real_to_time($str), '20000000:00');
+    }
+
+
+    public function testTimeConversion()
+    {
+        $hour = '233:58';
+        $real = '233.97';
+
+        $this->assertEquals(time_to_real($hour), $real);
+        $this->assertEquals(real_to_time($real), $hour);
+
+        $hour = '21:20';
+        $real = '21.33';
+        $this->assertEquals(time_to_real($hour), $real);
+        $this->assertEquals(real_to_time($real), $hour);
+
     }
 
 }

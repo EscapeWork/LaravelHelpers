@@ -82,7 +82,7 @@ function time_to_real($value)
     $hora    = $value[0];
     $minutos = $value[1];
 
-    return (float)($hora + ($minutos /60));
+    return round($hora + $minutos / 60, 2);
 }
 
 
@@ -100,7 +100,10 @@ function real_to_time($value)
     }
 
     $hora = intval($value);
-    $minuto = ($value - $hora) * 60;
+    $hora = $hora < 10 ? '0' . $hora : $hora;
 
-    return ($hora < 10 ? '0' + $hora : $hora) . ':' . ($minuto < 10 ? '0' . $minuto : $minuto);
+    $minuto = round(($value - $hora) * 60);
+    $minuto = $minuto < 10 ? '0' . $minuto : $minuto;
+
+    return $hora . ':' . $minuto;
 }
