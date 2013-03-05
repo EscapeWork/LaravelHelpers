@@ -92,4 +92,26 @@ class Eloquent extends Model
 
         return parent::delete();
     }
+
+    /**
+     * Setando os campos do produto através de um array
+     *
+     * @access  public 
+     * @return  void
+     */
+    public function setFields( array $fields = array() )
+    {
+        if( !is_array($this->fields) )
+        {
+            return;
+        }
+        
+        foreach( $this->fields as $field )
+        {
+            if( isset( $fields[ $field ] ) )
+            {
+                $this->$field = $fields[ $field ];
+            }
+        }
+    }
 }
