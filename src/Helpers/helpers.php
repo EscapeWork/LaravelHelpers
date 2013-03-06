@@ -60,7 +60,8 @@ function to_char($datetime, $format = 'd/m/Y H:i')
         return null;
     }
 
-    return (new DateTime($datetime))->format($format);
+    $dateTime = new DateTime($datetime);
+    return $dateTime->format($format);
 }
 
 
