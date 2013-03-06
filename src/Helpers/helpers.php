@@ -79,6 +79,11 @@ function time_to_real($value)
         return null;
     }
 
+    if( strpos($value, ':') < 0 )
+    {
+        $value .= ':00';
+    }
+
     $value   = explode(':', $value);
     $hora    = $value[0];
     $minutos = $value[1];
