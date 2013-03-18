@@ -52,12 +52,13 @@ class Eloquent extends Model
      */
     public static function HTMLOptions( $id = null, $field = 'title', $all = null )
     {
-        $all  = is_null( $all ) ? static::all() : $all;
-        $html = '';
+        $primaryKey = $this->primaryKey;
+        $all        = is_null( $all ) ? static::all() : $all;
+        $html       = '';
 
         foreach( $all as $item )
         {
-            $html .= '<option value="'.$item->id.'" '.( $id == $item->id ? 'selected="selected"' : null ).'>'.$item->$field.'</option>';
+            $html .= '<option value="'.$item->$primaryKey.'" '.( $id == $item->$primaryKey ? 'selected="selected"' : null ).'>'.$item->$field.'</option>';
         }
 
         return $html;
