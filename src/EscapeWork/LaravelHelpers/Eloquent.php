@@ -52,7 +52,8 @@ class Eloquent extends Model
      */
     public static function HTMLOptions( $id = null, $field = 'title', $all = null )
     {
-        $primaryKey = $this->primaryKey;
+        $object     = new get_called_class();
+        $primaryKey = $object->primaryKey;
         $all        = is_null( $all ) ? static::all() : $all;
         $html       = '';
 
