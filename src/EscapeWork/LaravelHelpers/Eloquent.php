@@ -79,7 +79,7 @@ class Eloquent extends Model
     /**
      * Reescrevendo a função Model::save para disparar um evento ao deletar
      */
-    public function save()
+    public function save(array $options = array())
     {
         Event::fire(get_called_class() . '.change', array('save'));
 
