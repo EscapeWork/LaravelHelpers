@@ -102,17 +102,14 @@ class Eloquent extends Model
      * @access  public 
      * @return  void
      */
-    public function setFields( array $fields = array() )
+    public function setFields(array $fields = array())
     {
-        if( !is_array($this->fields) )
-        {
+        if (! is_array($this->fillable) && count($this->fillable) == 0) {
             return;
         }
         
-        foreach( $this->fields as $field )
-        {
-            if( isset( $fields[ $field ] ) )
-            {
+        foreach ($this->fillable as $field) {
+            if (isset($fields[$field])) {
                 $this->$field = $fields[ $field ];
             }
         }
