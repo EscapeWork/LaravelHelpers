@@ -1,4 +1,4 @@
-# LaravelHelpers (Beta)
+# LaravelHelpers (Beta) [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers)
 
 ### Instalação
 
