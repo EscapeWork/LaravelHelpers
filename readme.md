@@ -16,6 +16,29 @@ A instalação está disponível via [Composer](https://packagist.org/packages/e
 
 - Altere o Alias da Eloquent para `EscapeWork\LaravelHelpers\Eloquent`;
 
+***
+
+### Slugs
+
+Caso seu model tenha um slug que precise ser montando a partir de um atributo antes de salvar no banco de dados, declare a váriave `$sluggable` como `true`.
+
+```php
+class Product extends Eloquent
+{
+
+    protected $sluggable = true;
+}
+```
+
+Ao executar as funções `save` e `update`, o slug vai ser gerado antes de salvar no banco de dados. 
+O slug é feito através do atributo `title`. Caso o seu atributo seja diferente, declare a váriavel `$sluggableAttr` com o nome desejado.
+
+```php
+protected $sluggableAttr = 'name';
+```
+
+***
+
 ### Validação
 
 Apenas defina as regras de validação do seu model: 
@@ -42,14 +65,14 @@ class UserTest extends TestCase
 
     public function testValidate()
     {
-        $fields = [
-            'title' => 'Testing'
-        ];
+        $fields = ['title' => 'Testing'];
 
-        $this->assertTrue( User::validate( $fields ) );
+        $this->assertTrue(User::validate($fields));
     }
 }
 ```
+
+***
 
 ### HTML Options
 
