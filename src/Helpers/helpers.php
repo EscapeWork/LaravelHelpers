@@ -37,8 +37,7 @@ function d($value)
  */
 function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
 {
-    if( $timestamp === null )
-    {
+    if ($timestamp === null) {
         return null;
     }
 
@@ -55,8 +54,7 @@ function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
  */
 function to_char($datetime, $format = 'd/m/Y H:i')
 {
-    if( $datetime === null )
-    {
+    if ($datetime === null) {
         return null;
     }
 
@@ -74,13 +72,11 @@ function to_char($datetime, $format = 'd/m/Y H:i')
  */
 function time_to_real($value)
 {
-    if( $value === null )
-    {
+    if ($value === null) {
         return null;
     }
 
-    if( strpos($value, ':') < 0 )
-    {
+    if (strpos($value, ':') < 0) {
         $value .= ':00';
     }
 
@@ -100,8 +96,7 @@ function time_to_real($value)
  */
 function real_to_time($value)
 {
-    if( $value === null )
-    {
+    if ($value === null) {
         return null;
     }
 
@@ -112,4 +107,22 @@ function real_to_time($value)
     $minuto = $minuto < 10 ? '0' . $minuto : $minuto;
 
     return $hora . ':' . $minuto;
+}
+
+/**
+ * Formating and array keys by a specific field
+ *
+ * @param   array  $items
+ * @param   string $key [default=id]
+ * @return  array
+ */
+function formatArrayKeysByField(array $items = array(), $field = 'id')
+{
+    $newArray = array();
+
+    foreach ($items as $item) {
+        $newArray[$item[$field]] = $item;
+    }
+
+    return $newArray;
 }

@@ -1,3 +1,7 @@
+### 0.2.2
+
+- Adicionada a função `formatArrayKeysByField`;
+
 ### 0.2.1 
 
 - Adicionada attributo `$sluggable`, onde é montando o slug automáticamente nas funções `save` e `delete`;
