@@ -1,3 +1,7 @@
+### 0.2.3
+
+- Removido pré condição de ser um array da função `formatArrayKeysByField`;
+
 ### 0.2.2
 
 - Adicionada a função `formatArrayKeysByField`;

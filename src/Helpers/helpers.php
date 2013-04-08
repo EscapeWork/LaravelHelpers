@@ -116,7 +116,7 @@ function real_to_time($value)
  * @param   string $key [default=id]
  * @return  array
  */
-function formatArrayKeysByField(array $items = array(), $field = 'id')
+function formatArrayKeysByField($items = array(), $field = 'id')
 {
     $newArray = array();
 
