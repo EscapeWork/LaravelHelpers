@@ -1,9 +1,8 @@
-<?php
-
+<?php 
 include_once('./src/Helpers/helpers.php');
 
-
-class helpersTest extends \PHPUnit_Framework_TestCase {
+class HelpersTest extends \PHPUnit_Framework_TestCase 
+{
 
 
     public function testToTimestamp()
@@ -96,4 +95,15 @@ class helpersTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    public function testFormatArrayKeysByField()
+    {
+        $array = array(
+            0 => array('id' => 10), 
+            1 => array('id' => 11)
+        );
+
+        $newArray = formatArrayKeysByField($array);
+        $this->assertTrue(isset($newArray[10]));
+        $this->assertTrue(isset($newArray[11]));
+    }
 }

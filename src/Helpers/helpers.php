@@ -79,8 +79,7 @@ function time_to_real($value)
         return null;
     }
 
-    if( strpos($value, ':') < 0 )
-    {
+    if (strpos($value, ':') < 0) {
         $value .= ':00';
     }
 
@@ -112,4 +111,22 @@ function real_to_time($value)
     $minuto = $minuto < 10 ? '0' . $minuto : $minuto;
 
     return $hora . ':' . $minuto;
+}
+
+/**
+ * Formating and array keys by a specific field
+ *
+ * @param   array  $items
+ * @param   string $key [default=id]
+ * @return  array
+ */
+function formatArrayKeysByField($items = array(), $field = 'id')
+{
+    $newArray = array();
+
+    foreach ($items as $item) {
+        $newArray[$item[$field]] = $item;
+    }
+
+    return $newArray;
 }

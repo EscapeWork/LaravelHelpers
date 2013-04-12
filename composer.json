@@ -19,7 +19,8 @@
     ], 
 
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0", 
+        "cocur/slugify": "dev-master"
     }, 
 
     "require-dev": {
