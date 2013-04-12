@@ -61,4 +61,39 @@ class helpersTest extends \PHPUnit_Framework_TestCase {
 
     }
 
+    public function testTimestampReturnNull()
+    {
+        $this->assertNull( to_timestamp(null) );
+        
+        $a = '';
+        $this->assertNull( to_timestamp($a) );
+    }
+
+    public function testToCharReturnNull()
+    {
+        $this->assertNull( to_char(null) );
+        
+        $a = '';
+        $this->assertNull( to_char($a) );
+    }
+
+
+    public function testTimeToRealReturnNull()
+    {
+        $this->assertNull( time_to_real(null) );
+        
+        $a = '';
+        $this->assertNull( time_to_real($a) );
+    }
+
+
+    public function testRealToTimeReturnNull()
+    {
+        $this->assertNull( real_to_time(null) );
+        
+        $a = '';
+        $this->assertNull( real_to_time($a) );
+    }
+
+
 }

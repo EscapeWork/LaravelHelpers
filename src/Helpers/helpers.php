@@ -37,7 +37,7 @@ function d($value)
  */
 function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
 {
-    if( $timestamp === null )
+    if( $timestamp === null or $timestamp == null )
     {
         return null;
     }
@@ -55,7 +55,7 @@ function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
  */
 function to_char($datetime, $format = 'd/m/Y H:i')
 {
-    if( $datetime === null )
+    if( $datetime === null or $datetime == null )
     {
         return null;
     }
@@ -74,7 +74,7 @@ function to_char($datetime, $format = 'd/m/Y H:i')
  */
 function time_to_real($value)
 {
-    if( $value === null )
+    if( $value === null or $value == null )
     {
         return null;
     }
@@ -100,7 +100,7 @@ function time_to_real($value)
  */
 function real_to_time($value)
 {
-    if( $value === null )
+    if( $value === null or $value == null )
     {
         return null;
     }
