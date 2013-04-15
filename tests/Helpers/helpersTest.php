@@ -106,4 +106,24 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($newArray[10]));
         $this->assertTrue(isset($newArray[11]));
     }
+
+
+    public function testTruncateWorks() 
+    {
+        $string   = 'quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um';
+        $truncate = truncate($string, 10);
+
+        $this->assertTrue( strlen($truncate) == 13);
+        $this->assertEquals( substr($truncate, -3), '...');        
+        $this->assertEquals( $truncate, 'quando um ...');        
+    }
+
+
+    public function testTruncateDoesntWork() 
+    {
+        $string = 'quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um';
+        $this->assertFalse( strlen(truncate($string, 10)) == 10);        
+    }
+
+
 }

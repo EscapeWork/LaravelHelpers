@@ -130,3 +130,16 @@ function formatArrayKeysByField($items = array(), $field = 'id')
 
     return $newArray;
 }
+
+
+/**
+ * Truncating string
+ *
+ * @param   string $value
+ * @param   int    $limit number to truncate
+ * @return  string
+ */
+function truncate($value, $limit)
+{
+    return substr($value, 0, $limit) . "...";
+}
