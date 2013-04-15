@@ -113,9 +113,9 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $string   = 'quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um';
         $truncate = truncate($string, 10);
 
-        $this->assertTrue( strlen($truncate) == 13);
+        $this->assertTrue( strlen($truncate) == 12);
         $this->assertEquals( substr($truncate, -3), '...');        
-        $this->assertEquals( $truncate, 'quando um ...');        
+        $this->assertEquals( $truncate, 'quando um...');        
     }
 
 

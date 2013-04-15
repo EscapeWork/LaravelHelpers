@@ -141,5 +141,5 @@ function formatArrayKeysByField($items = array(), $field = 'id')
  */
 function truncate($value, $limit)
 {
-    return substr($value, 0, $limit) . "...";
+    return rtrim(substr($value, 0, $limit)) . "...";
 }
