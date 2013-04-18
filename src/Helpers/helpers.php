@@ -79,8 +79,8 @@ function time_to_real($value)
         return null;
     }
 
-    if (strpos($value, ':') < 0) {
-        $value .= ':00';
+    if (strpos($value, ':') === false) {
+        return $value;
     }
 
     $value   = explode(':', $value);

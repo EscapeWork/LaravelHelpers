@@ -45,8 +45,11 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testTimeConversion()
+    public function testTimeToReal()
     {
+        $hour = '21';
+        $this->assertEquals(time_to_real($hour), $hour);
+
         $hour = '233:58';
         $real = '233.97';
 
@@ -57,7 +60,6 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $real = '21.33';
         $this->assertEquals(time_to_real($hour), $real);
         $this->assertEquals(real_to_time($real), $hour);
-
     }
 
     public function testTimestampReturnNull()
