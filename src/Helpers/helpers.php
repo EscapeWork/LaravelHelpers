@@ -80,7 +80,7 @@ function time_to_real($value)
     }
 
     if (strpos($value, ':') === false) {
-        return $value;
+        return $value; 
     }
 
     $value   = explode(':', $value);
