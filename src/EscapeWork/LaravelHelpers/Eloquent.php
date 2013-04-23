@@ -59,7 +59,7 @@ class Eloquent extends Model
     public function setDataFromArray(array $data)
     {
         foreach ($data as $attribute => $value) {
-            $this->$attribute = $value;
+            $this->$attribute = ($value == '' or is_null($value)) ? null : $value;
         }
     }
 
