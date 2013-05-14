@@ -3,18 +3,6 @@
  * Funções para otimizar códigos no Laravel
  */
 
-/**
- * Escrevendo valor de $value em um var_dump e terminando a execução
- * @param  mixed $value valor a ser dumpado
- * @return void
- * @author  Eduardo Kasper <eduardo@escape.ppg.br>
- */
-function dd($value)
-{
-    echo "<pre>";
-    var_dump($value);
-    die;
-}
 
 /**
  * Escrevendo valor de $value em um var_dump
