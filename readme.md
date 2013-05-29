@@ -7,7 +7,7 @@ A instalação está disponível via [Composer](https://packagist.org/packages/e
 ```
 {
     "require": {
-        "escapework/laravelhelpers": "0.1.*"
+        "escapework/laravelhelpers": "0.2.*"
     }
 }
 ```
@@ -85,17 +85,5 @@ class UserTest extends TestCase
     {{ User::HTMLOptions(2, 'name', User::getAdministrators()) }}
 </select>
 ```
-
-***
-
-### Eventos
-
-Comming soon.
-
-***
-
-### Populando o objeto por um array
-
-Comming soon.
 
 ***
