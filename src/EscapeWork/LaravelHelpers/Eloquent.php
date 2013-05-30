@@ -3,8 +3,7 @@ namespace EscapeWork\LaravelHelpers;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use Cocur\Slugify\Slugify;
-use \Validator;
-use \Event;
+use Validator;
 
 class Eloquent extends Model
 {
@@ -55,20 +54,12 @@ class Eloquent extends Model
         return true;
     }
 
-
-    public function setDataFromArray(array $data)
-    {
-        foreach ($data as $attribute => $value) {
-            $this->$attribute = ($value == '' or is_null($value)) ? null : $value;
-        }
-    }
-
     /**
      * Gerando um HTML Select com TODAS as opções
      *
      * @access  public 
-     * @param   $id    int [com o ID atual]
-     * @return  string [HTML Select]
+     * @param   int    $id  [com o ID atual]
+     * @return  string      [HTML Select]
      */
     public static function HTMLOptions($id = null, $field = 'title', $all = null)
     {
@@ -86,12 +77,10 @@ class Eloquent extends Model
     }
 
     /**
-     * Reescrevendo a função Model::update para disparar um evento ao update
+     * Reescrevendo a função Model::update para fazer o slug se nessesário
      */
     public function update(array $attributes = array())
     {
-        Event::fire(get_called_class() . '.change', array('update'));
-
         if ($this->isSluggable()) {
             $this->makeSlug();
         }
@@ -100,46 +89,15 @@ class Eloquent extends Model
     }
 
     /**
-     * Reescrevendo a função Model::save para disparar um evento ao deletar
+     * Reescrevendo a função Model::save para fazer o slug se nessesário
      */
     public function save(array $options = array())
     {
-        Event::fire(get_called_class() . '.change', array('save'));
-
         if ($this->isSluggable()) {
             $this->makeSlug();
         }
 
         return parent::save($options);
-    }
-
-    /**
-     * Reescrevendo a função Model::delete para disparar um evento ao excluir
-     */
-    public function delete()
-    {
-        Event::fire(get_called_class() . '.change', array('delete'));
-
-        return parent::delete();
-    }
-
-    /**
-     * Setando os campos do produto através de um array
-     *
-     * @access  public 
-     * @return  void
-     */
-    public function setFields(array $fields = array())
-    {
-        if (! is_array($this->fillable) && count($this->fillable) == 0) {
-            return;
-        }
-        
-        foreach ($this->fillable as $field) {
-            if (isset($fields[$field])) {
-                $this->$field = $fields[ $field ];
-            }
-        }
     }
 
     /**
@@ -151,7 +109,7 @@ class Eloquent extends Model
     }
 
     /**
-     * Criando o slug do produto
+     * Creating the product slug
      */
     public function makeSlug()
     {
