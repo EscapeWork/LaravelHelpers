@@ -1,4 +1,6 @@
-# LaravelHelpers (Beta) [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers)
+# LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers)
+
+Um conjunto de helpers para facilitar o seu desenvolvimento com o [Laravel 4](http://laravel.com).
 
 ### Instalação
 
@@ -7,7 +9,7 @@ A instalação está disponível via [Composer](https://packagist.org/packages/e
 ```
 {
     "require": {
-        "escapework/laravelhelpers": "0.2.*"
+        "escapework/laravelhelpers": "0.4.*"
     }
 }
 ```
@@ -65,9 +67,10 @@ class UserTest extends TestCase
 
     public function testValidate()
     {
-        $fields = ['title' => 'Testing'];
+        $user = new User();
+        $user->fill(['title' => 'Testing']);
 
-        $this->assertTrue(User::validate($fields));
+        $this->assertTrue(User::validate());
     }
 }
 ```
@@ -85,5 +88,3 @@ class UserTest extends TestCase
     {{ User::HTMLOptions(2, 'name', User::getAdministrators()) }}
 </select>
 ```
-
-***

@@ -1,5 +1,4 @@
-<?php 
-namespace EscapeWork\LaravelHelpers;
+<?php namespace EscapeWork\LaravelHelpers;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use Cocur\Slugify\Slugify;
@@ -39,11 +38,12 @@ class Eloquent extends Model
     protected $sluggableAttr = 'title';
 
     /**
-     * Método de valicação
+     * Validating the model fields
      */
-    public static function validate($fields)
+    public static function validate()
     {
-        $validation = Validator::make( $fields, static::$validationRules, static::$validationMessages );
+        $fields     = $this->attributes;
+        $validation = Validator::make($fields, static::$validationRules, static::$validationMessages);
 
         if ($validation->fails()) {
             static::$messages = $validation->messages()->getMessages();
