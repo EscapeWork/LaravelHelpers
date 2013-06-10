@@ -40,7 +40,7 @@ class Eloquent extends Model
     /**
      * Validating the model fields
      */
-    public static function validate()
+    public function validate()
     {
         $fields     = $this->attributes;
         $validation = Validator::make($fields, static::$validationRules, static::$validationMessages);
