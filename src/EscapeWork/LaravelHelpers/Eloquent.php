@@ -61,7 +61,7 @@ class Eloquent extends Model
      * @param   int    $id  [com o ID atual]
      * @return  string      [HTML Select]
      */
-    public static function HTMLOptions($id = null, $field = 'title', $all = null)
+    public function HTMLOptions($id = null, $field = 'title', $all = null)
     {
         $class      = get_called_class();
         $object     = new $class;
