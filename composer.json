@@ -1,6 +1,6 @@
 {
     "name": "escapework/laravelhelpers", 
-    "description": "Modificações no frameWork do Laravel para melhorar alguns workflows", 
+    "description": "Some Laravel 4 helpers to enjoy even more development", 
     "type": "library", 
     "license": "MIT", 
 

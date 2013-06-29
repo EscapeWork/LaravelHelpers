@@ -1,4 +1,4 @@
-# LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers) [![Latest Stable Version](https://poser.pugx.org/escapework/laravel-helpers/v/stable.png)](https://packagist.org/packages/escapework/laravel-helpers) [![Total Downloads](https://poser.pugx.org/escapework/laravel-helpers/downloads.png)](https://packagist.org/packages/escapework/laravel-helpers)
+# LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers) [![Latest Stable Version](https://poser.pugx.org/escapework/laravelhelpers/v/stable.png)](https://packagist.org/packages/escapework/laravelhelpers) [![Total Downloads](https://poser.pugx.org/escapework/laravelhelpers/downloads.png)](https://packagist.org/packages/escapework/laravelhelpers)
 
 A set of tools and helpers to help the [Laravel 4](http://laravel.com) development.
 
