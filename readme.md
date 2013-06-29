@@ -1,12 +1,12 @@
-# LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers)
+# LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers) [![Latest Stable Version](https://poser.pugx.org/escapework/laravel-helpers/v/stable.png)](https://packagist.org/packages/escapework/laravel-helpers) [![Total Downloads](https://poser.pugx.org/escapework/laravel-helpers/downloads.png)](https://packagist.org/packages/escapework/laravel-helpers)
 
 A set of tools and helpers to help the [Laravel 4](http://laravel.com) development.
 
 ### Instalation
 
-Install via  [Composer](https://packagist.org/packages/escapework/laravelhelpers).
+Install via [Composer](https://packagist.org/packages/escapework/laravelhelpers).
 
-```
+```javascript
 {
     "require": {
         "escapework/laravelhelpers": "0.4.*"
@@ -16,7 +16,7 @@ Install via  [Composer](https://packagist.org/packages/escapework/laravelhelpers
 
 ### Configuration
 
-- Change the `Eloquent` alias to `EscapeWork\LaravelHelpers\Eloquent`;
+Change the `Eloquent` alias to `EscapeWork\LaravelHelpers\Eloquent`;
 
 ***
 
@@ -73,6 +73,12 @@ class User extends Eloquent
 }
 ```
 
+If your validation fails, error messages will be set in the static variable `$messages` as an array.
+
+```php
+    dd(User::$messages);
+```
+
 ```php
 class UserTest extends TestCase
 {
@@ -92,7 +98,7 @@ class UserTest extends TestCase
 ### HTML Options
 
 ```php
-<select>
+<select name="user_id">
     {{ $user->HTMLOptions() }}
 </select>
 
