@@ -23,7 +23,7 @@ function d($value)
  * @return timestamp  formato timestamp aceito no banco
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
+function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i')
 {
     if( $timestamp === null or $timestamp == null )
     {
@@ -41,7 +41,7 @@ function to_timestamp($timestamp, $formatFrom = 'd/m/Y H:i')
  * @return string           string formatado
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function to_char($datetime, $format = 'd/m/Y H:i')
+function to_char($datetime = null, $format = 'd/m/Y H:i')
 {
     if( $datetime === null or $datetime == null )
     {
@@ -60,7 +60,7 @@ function to_char($datetime, $format = 'd/m/Y H:i')
  * @return real           
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function time_to_real($value)
+function time_to_real($value = null)
 {
     if( $value === null or $value == null )
     {
@@ -85,7 +85,7 @@ function time_to_real($value)
  * @return  string           
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function real_to_time($value)
+function real_to_time($value = null)
 {
     if( $value === null or $value == null )
     {

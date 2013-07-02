@@ -4,6 +4,10 @@ include_once('./src/Helpers/helpers.php');
 class HelpersTest extends \PHPUnit_Framework_TestCase 
 {
 
+    public function testToTimestampEmpty()
+    {
+        $this->assertNull(to_timestamp());
+    }
 
     public function testToTimestamp()
     {
@@ -17,6 +21,10 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals( to_timestamp($str), '15-01-2013 22:17');
     }
 
+    public function testToCharEmpty()
+    {
+        $this->assertNull(to_char());
+    }
 
     public function testToChar()
     {
@@ -26,7 +34,11 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $str = '2013-01-15 22:18';
         $this->assertEquals( to_char($str), '15/01/2013 22:18');
     }
-    
+        
+    public function testRealToTimeEmpty() 
+    {
+        $this->assertNull(real_to_time());
+    }
 
     public function testRealToTime()
     {
@@ -44,6 +56,11 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(real_to_time($str), '20000000:00');
     }
 
+        
+    public function testTimeToRealEmpty() 
+    {
+        $this->assertNull(time_to_real());
+    }
 
     public function testTimeToReal()
     {
