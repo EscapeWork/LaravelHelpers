@@ -1,7 +1,7 @@
 <?php namespace EscapeWork\LaravelHelpers;
 
-use Illuminate\Database\Eloquent\Model as Model;
-use Cocur\Slugify\Slugify;
+use Illuminate\Database\Eloquent\Model;
+use Str;
 use Validator;
 
 class Eloquent extends Model
@@ -114,13 +114,12 @@ class Eloquent extends Model
     public function makeSlug()
     {
         $attr       = $this->sluggableAttr;
-        $slugify    = new Slugify(Slugify::MODEARRAY);
-        $this->slug = $slugify->slugify($this->$attr);
+        $this->slug = Str::slug($this->$attr);
         $count      = 0;
 
         while ($this->where('slug', '=', $this->slug)->where('id', '<>', $this->id)->first()) {
             $count++;
-            $this->slug = $slugify->slugify($this->$attr) . '-' . $count;
+            $this->slug = Str::slug($this->$attr) . '-' . $count;
         }
     }
 }
