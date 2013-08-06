@@ -19,6 +19,16 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
 
         $str = '15/01/2013 22:18';
         $this->assertNotEquals( to_timestamp($str), '15-01-2013 22:17');
+
+        $str = '15/01/2013';
+        $this->assertNotEquals( to_timestamp($str, 'd/m/Y', 'Y-m-d'), '15-01-2013');
+    }
+
+    public function testToTimestampShouldReturnNull()
+    {
+        $str = '01/01/2013 22:18';
+        $this->assertNull( to_timestamp($str, null));
+        $this->assertNull( to_timestamp($str, ''));
     }
 
     public function testToCharEmpty()
@@ -33,6 +43,13 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
 
         $str = '2013-01-15 22:18';
         $this->assertEquals( to_char($str), '15/01/2013 22:18');
+    }
+    
+    public function testToCharShouldReturnNull()
+    {
+        $str = '2013-01-01 22:18';
+        $this->assertNull( to_char($str, null));
+        $this->assertNull( to_char($str, ''));
     }
         
     public function testRealToTimeEmpty() 
@@ -60,8 +77,9 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
     public function testTimeToRealEmpty() 
     {
         $this->assertNull(time_to_real());
+        $this->assertNull(time_to_real(null));
     }
-
+   
     public function testTimeToReal()
     {
         $hour = '21';

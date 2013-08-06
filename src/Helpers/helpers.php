@@ -20,17 +20,29 @@ function d($value)
  * Retornando timestamp a partir do formato em $formatFrom
  * @param  string $timestamp  timestamp não formatado
  * @param  string $formatFrom formato do timestamp em $timestamp. Default 'd/m/Y H:i'
+ * @param  string $formatFor  formato de saída do timestamp. Default 'Y-m-d H:i'
+ *
  * @return timestamp  formato timestamp aceito no banco
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i')
+function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor = 'Y-m-d H:i')
 {
-    if( $timestamp === null or $timestamp == null )
+    if( $timestamp === null or $timestamp == null or empty($timestamp))
     {
         return null;
     }
 
-    return DateTime::createFromFormat($formatFrom, $timestamp)->format('Y-m-d H:i');
+    if( $formatFrom === null or $formatFrom == null or empty($formatFrom))
+    {
+        return null;
+    }
+
+    if( $formatFor === null or $formatFor == null or empty($formatFor))
+    {
+        return null;
+    }
+
+    return DateTime::createFromFormat($formatFrom, $timestamp)->format($formatFor);
 }
 
 
@@ -38,12 +50,18 @@ function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i')
  * Formatando um timestamp para formato em $format
  * @param  timestamp $datetime 
  * @param  string $format   formato da string de retorno
+ *
  * @return string           string formatado
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
 function to_char($datetime = null, $format = 'd/m/Y H:i')
 {
     if( $datetime === null or $datetime == null )
+    {
+        return null;
+    }
+
+    if( $format === null or $format == null )
     {
         return null;
     }
