@@ -107,12 +107,27 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
 
     public function testToCharReturnNull()
     {
-        $this->assertNull( to_char(null) );
-        
-        $a = '';
-        $this->assertNull( to_char($a) );
+        $this->assertNull(to_char(null));
+        $this->assertNull(to_char(''));
     }
 
+    public function testToCharToReal()
+    {
+        $char = '1.000.000,00';
+        $this->assertEquals(char_to_real($char), 1000000);
+
+        $char = '1.000.000,55';
+        $this->assertEquals(char_to_real($char), 1000000.55);
+
+        $char = '1,000,200.00';
+        $this->assertEquals(char_to_real($char, '.', ','), 1000200);
+    }
+
+    public function testToCharToRealShouldReturnNull()
+    {
+        $this->assertNull(char_to_real(null));
+        $this->assertNull(char_to_real(''));
+    }
 
     public function testTimeToRealReturnNull()
     {

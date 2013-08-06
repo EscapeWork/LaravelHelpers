@@ -119,6 +119,29 @@ function real_to_time($value = null)
     return $hora . ':' . $minuto;
 }
 
+
+/**
+ * Formatando um valor formatado para um valor `real`/`float`
+ * @param   string $char valor não float
+ * @param   string $dec_point string separadora de decimal
+ * @param   string $thousands_sep string separadora de milhares
+ *
+ * @return  float
+ * @author  Eduardo Kasper <eduardo@escape.ppg.br>
+ */
+function char_to_real($char = null, $dec_point = ',', $thousands_sep = '.')
+{
+    if( $char === null or $char == null )
+    {
+        return null;
+    }
+
+    $char = str_replace($thousands_sep, null, $char);
+    $char = str_replace($dec_point, '.', $char);
+
+    return (float) $char;
+}
+
 /**
  * Formating and array keys by a specific field
  *
