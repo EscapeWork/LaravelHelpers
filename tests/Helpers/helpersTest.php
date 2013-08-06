@@ -26,14 +26,13 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
 
     public function testToTimestampShouldReturnNull()
     {
-        $str = '01/01/2013 22:18';
-        $this->assertNull( to_timestamp($str, null));
-        $this->assertNull( to_timestamp($str, ''));
+        $str = 'invalido';
+        $this->assertNull( to_timestamp($str));
     }
 
     public function testToCharEmpty()
     {
-        $this->assertNull(to_char());
+        $this->assertNull(to_char(null));
     }
 
     public function testToChar()
@@ -47,9 +46,8 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
     
     public function testToCharShouldReturnNull()
     {
-        $str = '2013-01-01 22:18';
-        $this->assertNull( to_char($str, null));
-        $this->assertNull( to_char($str, ''));
+        $str = 'invalid';
+        $this->assertNull(to_char($str));
     }
         
     public function testRealToTimeEmpty() 

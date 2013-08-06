@@ -27,22 +27,16 @@ function d($value)
  */
 function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor = 'Y-m-d H:i')
 {
-    if( $timestamp === null or $timestamp == null or empty($timestamp))
-    {
+    if ($timestamp == null or empty($timestamp)) {
         return null;
     }
 
-    if( $formatFrom === null or $formatFrom == null or empty($formatFrom))
-    {
+    $dateTime = DateTime::createFromFormat($formatFrom, $timestamp);
+    if (! $dateTime) {
         return null;
     }
 
-    if( $formatFor === null or $formatFor == null or empty($formatFor))
-    {
-        return null;
-    }
-
-    return DateTime::createFromFormat($formatFrom, $timestamp)->format($formatFor);
+    return $dateTime->format($formatFor);
 }
 
 
@@ -54,20 +48,19 @@ function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor =
  * @return string           string formatado
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function to_char($datetime = null, $format = 'd/m/Y H:i')
+function to_char($datetime, $formatFrom = 'Y-m-d H:i', $formatFor = 'd/m/Y H:i')
 {
-    if( $datetime === null or $datetime == null )
-    {
+    if ($datetime == null or empty($datetime)) {
         return null;
     }
 
-    if( $format === null or $format == null )
-    {
+    $dateTime = DateTime::createFromFormat($formatFrom, $datetime);
+    if (! $dateTime) {
         return null;
     }
 
-    $dateTime = new DateTime($datetime);
-    return $dateTime->format($format);
+    return $dateTime->format($formatFor);
+
 }
 
 
@@ -129,10 +122,9 @@ function real_to_time($value = null)
  * @return  float
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function char_to_real($char = null, $dec_point = ',', $thousands_sep = '.')
+function char_to_real($char, $dec_point = ',', $thousands_sep = '.')
 {
-    if( $char === null or $char == null )
-    {
+    if ($char == null or empty($char)) {
         return null;
     }
 
