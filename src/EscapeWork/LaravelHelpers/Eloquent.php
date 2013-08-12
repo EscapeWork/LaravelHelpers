@@ -122,4 +122,14 @@ class Eloquent extends Model
             $this->slug = Str::slug($this->$attr) . '-' . $count;
         }
     }
+
+    /**
+     * Setting if the model is sluggable
+     *
+     * @param  boolean $sluggable
+     */
+    public function setSluggable($sluggable)
+    {
+        $this->sluggable = $sluggable;
+    }
 }
