@@ -9,25 +9,37 @@ class Eloquent extends Model
 
     /**
      * Validation rules
+     * 
      * @var array
      */
     public static $validationRules = array();
 
     /**
      * Validation messages
+     * 
      * @var array
      */
     public static $validationMessages = array();
 
     /**
      * Validation set os messages when fails
+     * 
      * @var array
      */
     public static $messages = array();
 
+     /**
+     * The message bag
+     * 
+     * @var array
+     */
+    public $messageBag;
+
     /**
      * Setting if the model is 'sluggable'
      * When setting this to true, the save and update methos are going to make and slug before save
+     *
+     * @var  boolean
      */
     protected $sluggable = false;
 
@@ -46,7 +58,8 @@ class Eloquent extends Model
         $validation = Validator::make($fields, static::$validationRules, static::$validationMessages);
 
         if ($validation->fails()) {
-            static::$messages = $validation->messages()->getMessages();
+            $this->messageBag = $validation->messages();
+            static::$messages = $this->messageBag->getMessages();
             
             return false;
         }
