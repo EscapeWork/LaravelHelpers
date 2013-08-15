@@ -9,7 +9,7 @@ Install via [Composer](https://packagist.org/packages/escapework/laravelhelpers)
 ```javascript
 {
     "require": {
-        "escapework/laravelhelpers": "0.4.*"
+        "escapework/laravelhelpers": "0.5.*"
     }
 }
 ```
@@ -73,11 +73,7 @@ class User extends Eloquent
 }
 ```
 
-If your validation fails, error messages will be set in the static variable `$messages` as an array.
-
-```php
-    dd(User::$messages);
-```
+And you can validate your models just calling the `validate()` method.
 
 ```php
 class UserTest extends TestCase
@@ -91,6 +87,18 @@ class UserTest extends TestCase
         $this->assertTrue($user->validate());
     }
 }
+```
+
+If your validation fails, error messages will be set in the static variable `$messages` as an array.
+
+```php
+    dd(User::$messages);
+```
+
+Case you wish the Laravel `MessageBag` object, you can access in the attribute `$messageBag`.
+
+```php
+$user->messageBag()
 ```
 
 ***
