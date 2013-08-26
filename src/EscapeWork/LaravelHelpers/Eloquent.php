@@ -1,6 +1,7 @@
 <?php namespace EscapeWork\LaravelHelpers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Str;
 use Validator;
 use App;
@@ -10,28 +11,28 @@ class Eloquent extends Model
 
     /**
      * Validation rules
-     * 
+     *
      * @var array
      */
     public static $validationRules = array();
 
     /**
      * Validation messages
-     * 
+     *
      * @var array
      */
     public static $validationMessages = array();
 
     /**
      * Validation set os messages when fails
-     * 
+     *
      * @var array
      */
     public static $messages = array();
 
      /**
      * The message bag
-     * 
+     *
      * @var array
      */
     public $messageBag;
@@ -115,13 +116,13 @@ class Eloquent extends Model
             });
         });
 
-        return $rules;    
+        return $rules;
     }
 
     /**
      * Gerando um HTML Select com TODAS as opções
      *
-     * @access  public 
+     * @access  public
      * @param   int    $id  [com o ID atual]
      * @return  string      [HTML Select]
      */
@@ -195,5 +196,17 @@ class Eloquent extends Model
     public function setSluggable($sluggable)
     {
         $this->sluggable = $sluggable;
+    }
+
+    /**
+     * Find or fail by $field
+     */
+    public function findOrFailBy($field, $value)
+    {
+        if ($model = $this->where($field, '=', $value)->first()) {
+            return $model;
+        }
+
+        throw new ModelNotFoundException;
     }
 }
