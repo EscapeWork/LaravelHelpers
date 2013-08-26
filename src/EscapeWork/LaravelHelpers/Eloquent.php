@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Str;
 use Validator;
+use App;
 
 class Eloquent extends Model
 {
@@ -50,21 +51,71 @@ class Eloquent extends Model
     protected $sluggableAttr = 'title';
 
     /**
+     * The Validator factory instance.
+     *
+     * @var Illuminate\Validation\Factory
+     */
+    protected $validatorFactory;
+
+    /**
+     * The Validator instance.
+     *
+     * @var Illuminate\Validation\Validator
+     */
+    protected $validator;
+
+    /**
+     * Create a new instance.
+     *
+     * @param  array  $attributes
+     * @param  Illuminate\Validation\Factory  $validator
+     * @return void
+     */
+    public function __construct(array $attributes = array())
+    {
+        parent::__construct($attributes);
+
+        $this->validatorFactory = App::make('validator');
+    }
+
+
+    /**
      * Validating the model fields
      */
-    public function validate()
+    public function validate(array $rules = array())
     {
-        $fields     = $this->attributes;
-        $validation = Validator::make($fields, static::$validationRules, static::$validationMessages);
+        $rules           = $this->processRules($rules ? $rules : static::$validationRules);
+        $this->validator = $this->validatorFactory->make($this->attributes, $rules);
 
-        if ($validation->fails()) {
-            $this->messageBag = $validation->messages();
+        if ($this->validator->fails()) {
+            $this->messageBag = $this->validator->messages();
             static::$messages = $this->messageBag->getMessages();
-            
+
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Process validation rules.
+     *
+     * @param  array  $rules
+     * @return array  $rules
+     */
+    protected function processRules($rules = array())
+    {
+        $id = $this->getKey();
+
+        array_walk($rules, function(&$arrRules) use ($id)
+        {
+            array_walk($arrRules, function(&$item) use ($id)
+            {
+                $item = stripos($item, ':id:') !== false ? str_ireplace(':id:', $id, $item) : $item;
+            });
+        });
+
+        return $rules;    
     }
 
     /**
