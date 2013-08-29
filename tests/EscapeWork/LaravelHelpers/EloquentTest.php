@@ -15,11 +15,11 @@ class EloquentTest extends PHPUnit_Framework_TestCase
         $validator->shouldReceive('fails')->once()->andReturn(false);
 
         $validatorFactory = m::mock('ValidatorFactory');
-        $validatorFactory->shouldReceive('make')->once()->with([], [], [])->andReturn($validator);
+        $validatorFactory->shouldReceive('make')->once()->with(array(), array(), array())->andReturn($validator);
 
 
-        $eloquent = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', [[], $validatorFactory]);
-        $this->assertTrue($eloquent->validate([]));
+        $eloquent = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', array(array(), $validatorFactory));
+        $this->assertTrue($eloquent->validate(array()));
     }
 
     /**
@@ -28,18 +28,18 @@ class EloquentTest extends PHPUnit_Framework_TestCase
     public function test_validate_with_invalid_data()
     {
         $messageBag = m::mock('MessageBag');
-        $messageBag->shouldReceive('getMessages')->once()->andReturn(['name' => []]);
+        $messageBag->shouldReceive('getMessages')->once()->andReturn(['name' => array()]);
 
         $validator = m::mock('Validator');
         $validator->shouldReceive('fails')->once()->andReturn(true);
         $validator->shouldReceive('messages')->once()->withNoArgs()->andReturn($messageBag);
 
         $validatorFactory = m::mock('ValidatorFactory');
-        $validatorFactory->shouldReceive('make')->once()->with([], [], [])->andReturn($validator);
+        $validatorFactory->shouldReceive('make')->once()->with(array(), array(), array())->andReturn($validator);
 
 
-        $eloquent = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', [[], $validatorFactory]);
-        $this->assertFalse($eloquent->validate([]));
+        $eloquent = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', array(array(), $validatorFactory));
+        $this->assertFalse($eloquent->validate(array()));
         $this->assertEquals($messageBag, $eloquent->messageBag);
     }
 
@@ -48,7 +48,7 @@ class EloquentTest extends PHPUnit_Framework_TestCase
      */
     public function test_find_or_fail_by_with_resource_found()
     {
-        $eloquent = m::mock('EscapeWork\LaravelHelpers\Eloquent[where,first]', [[], new \stdClass]);
+        $eloquent = m::mock('EscapeWork\LaravelHelpers\Eloquent[where,first]', array(array(), new \stdClass));
         $eloquent->shouldReceive('where')->once()->with('slug', '=', 'laravel-helpers-eloquent')->andReturn($eloquent);
         $eloquent->shouldReceive('first')->once()->withNoArgs()->andReturn($eloquent);
 
@@ -61,7 +61,7 @@ class EloquentTest extends PHPUnit_Framework_TestCase
      */
     public function test_find_or_fail_by_with_resource_not_found()
     {
-        $eloquent = m::mock('EscapeWork\LaravelHelpers\Eloquent[where,first]', [[], new \stdClass]);
+        $eloquent = m::mock('EscapeWork\LaravelHelpers\Eloquent[where,first]', array(array(), new \stdClass));
         $eloquent->shouldReceive('where')->once()->with('slug', '=', 'codeigniter')->andReturn($eloquent);
         $eloquent->shouldReceive('first')->once()->withNoArgs()->andReturn(false);
 
