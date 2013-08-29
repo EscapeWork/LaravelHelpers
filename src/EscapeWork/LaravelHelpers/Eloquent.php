@@ -86,7 +86,8 @@ class Eloquent extends Model
     public function validate(array $rules = array())
     {
         $rules           = $this->processRules($rules ? $rules : static::$validationRules);
-        $this->validator = $this->validatorFactory->make($this->attributes, $rules);
+        $messages        = static::$validationMessages;
+        $this->validator = $this->validatorFactory->make($this->attributes, $rules, $messages);
 
         if ($this->validator->fails()) {
             $this->messageBag = $this->validator->messages();
