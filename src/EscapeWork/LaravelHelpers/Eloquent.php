@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Str;
-use Validator;
-use App;
+use Illuminate\Support\Str;
 
-class Eloquent extends Model
+abstract class Eloquent extends Model
 {
 
     /**
@@ -72,11 +70,11 @@ class Eloquent extends Model
      * @param  Illuminate\Validation\Factory  $validator
      * @return void
      */
-    public function __construct(array $attributes = array())
+    public function __construct(array $attributes = array(), $validator = null)
     {
         parent::__construct($attributes);
 
-        $this->validatorFactory = App::make('validator');
+        $this->validatorFactory = $validator ?: \App::make('validator');
     }
 
 
@@ -208,6 +206,6 @@ class Eloquent extends Model
             return $model;
         }
 
-        throw new ModelNotFoundException;
+        throw new ModelNotFoundException();
     }
 }
