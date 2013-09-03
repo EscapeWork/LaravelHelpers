@@ -115,6 +115,8 @@ $user->messageBag()
 </select>
 ```
 
+***
+
 ### Find or Fail By
 
 ```php
