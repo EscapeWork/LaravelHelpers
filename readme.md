@@ -51,8 +51,6 @@ protected $sluggableAttr = 'name';
 }
 ```
 
-We use the [Cocur\Slugify](https://github.com/cocur/slugify) to create the slugs.
-
 ***
 
 ### Validations
@@ -98,7 +96,7 @@ If your validation fails, error messages will be set in the static variable `$me
 Case you wish the Laravel `MessageBag` object, you can access in the attribute `$messageBag`.
 
 ```php
-$user->messageBag()
+    $user->messageBag
 ```
 
 ***
