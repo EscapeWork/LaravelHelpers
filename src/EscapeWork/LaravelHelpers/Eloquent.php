@@ -157,7 +157,7 @@ abstract class Eloquent extends Model
      */
     public function save(array $options = array())
     {
-        if ($this->isSluggable()) {
+        if ($this->isSluggable() && is_null($this->slug)) {
             $this->makeSlug();
         }
 
