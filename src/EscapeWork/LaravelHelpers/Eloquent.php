@@ -181,7 +181,7 @@ abstract class Eloquent extends Model
         $this->slug = Str::slug($this->$attr);
         $count      = 0;
 
-        while ($this->slugExists())) {
+        while ($this->slugExists()) {
             $count++;
             $this->slug = Str::slug($this->$attr) . '-' . $count;
         }
