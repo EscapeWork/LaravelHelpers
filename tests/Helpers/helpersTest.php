@@ -1,7 +1,7 @@
-<?php 
+<?php
 include_once('./src/Helpers/helpers.php');
 
-class HelpersTest extends \PHPUnit_Framework_TestCase 
+class HelpersTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testToTimestampEmpty()
@@ -43,14 +43,14 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $str = '2013-01-15 22:18';
         $this->assertEquals( to_char($str), '15/01/2013 22:18');
     }
-    
+
     public function testToCharShouldReturnNull()
     {
         $str = 'invalid';
         $this->assertNull(to_char($str));
     }
-        
-    public function testRealToTimeEmpty() 
+
+    public function testRealToTimeEmpty()
     {
         $this->assertNull(real_to_time());
     }
@@ -71,13 +71,13 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(real_to_time($str), '20000000:00');
     }
 
-        
-    public function testTimeToRealEmpty() 
+
+    public function testTimeToRealEmpty()
     {
         $this->assertNull(time_to_real());
         $this->assertNull(time_to_real(null));
     }
-   
+
     public function testTimeToReal()
     {
         $hour = '21';
@@ -98,7 +98,7 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
     public function testTimestampReturnNull()
     {
         $this->assertNull( to_timestamp(null) );
-        
+
         $a = '';
         $this->assertNull( to_timestamp($a) );
     }
@@ -129,26 +129,18 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
 
     public function testTimeToRealReturnNull()
     {
-        $this->assertNull( time_to_real(null) );
-        
-        $a = '';
-        $this->assertNull( time_to_real($a) );
+        $this->assertNull(time_to_real(null));
     }
-
 
     public function testRealToTimeReturnNull()
     {
-        $this->assertNull( real_to_time(null) );
-        
-        $a = '';
-        $this->assertNull( real_to_time($a) );
+        $this->assertNull(real_to_time(null));
     }
-
 
     public function testFormatArrayKeysByField()
     {
         $array = array(
-            0 => array('id' => 10), 
+            0 => array('id' => 10),
             1 => array('id' => 11)
         );
 
@@ -157,22 +149,21 @@ class HelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($newArray[11]));
     }
 
-
-    public function testTruncateWorks() 
+    public function testTruncateWorks()
     {
         $string   = 'quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um';
         $truncate = truncate($string, 10);
 
         $this->assertTrue( strlen($truncate) == 12);
-        $this->assertEquals( substr($truncate, -3), '...');        
-        $this->assertEquals( $truncate, 'quando um...');        
+        $this->assertEquals( substr($truncate, -3), '...');
+        $this->assertEquals( $truncate, 'quando um...');
     }
 
 
-    public function testTruncateDoesntWork() 
+    public function testTruncateDoesntWork()
     {
         $string = 'quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer umquando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um';
-        $this->assertFalse( strlen(truncate($string, 10)) == 10);        
+        $this->assertFalse( strlen(truncate($string, 10)) == 10);
     }
 
 
