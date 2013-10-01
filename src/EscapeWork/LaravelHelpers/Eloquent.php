@@ -181,10 +181,24 @@ abstract class Eloquent extends Model
         $this->slug = Str::slug($this->$attr);
         $count      = 0;
 
-        while ($this->where('slug', '=', $this->slug)->where('id', '<>', $this->id)->first()) {
+        while ($this->slugExists())) {
             $count++;
             $this->slug = Str::slug($this->$attr) . '-' . $count;
         }
+    }
+
+    /**
+     * Checking if the slug exists
+     */
+    protected function slugExists()
+    {
+        $query = $this->where('slug', '=', $this->slug);
+
+        if ($this->exists) {
+            $query->where('id', '<>', $this->id);
+        }
+
+        return $query->first();
     }
 
     /**
