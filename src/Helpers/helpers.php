@@ -42,7 +42,7 @@ function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor =
 
 /**
  * Formatando um timestamp para formato em $format
- * @param  timestamp $datetime 
+ * @param  timestamp $datetime
  * @param  string $format   formato da string de retorno
  *
  * @return string           string formatado
@@ -54,8 +54,7 @@ function to_char($datetime, $formatFrom = 'Y-m-d H:i', $formatFor = 'd/m/Y H:i')
         return null;
     }
 
-    $dateTime = DateTime::createFromFormat($formatFrom, $datetime);
-    if (! $dateTime) {
+    if (! $dateTime = DateTime::createFromFormat($formatFrom, $datetime)) {
         return null;
     }
 
@@ -68,18 +67,17 @@ function to_char($datetime, $formatFrom = 'Y-m-d H:i', $formatFor = 'd/m/Y H:i')
 /**
  * Formatando uma string de tempo para real
  * @param  string $value
- * @return real           
+ * @return real
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
 function time_to_real($value = null)
 {
-    if( $value === null or $value == null )
-    {
+    if (is_null($value)) {
         return null;
     }
 
     if (strpos($value, ':') === false) {
-        return $value; 
+        return $value;
     }
 
     $value   = explode(':', $value);
@@ -93,13 +91,12 @@ function time_to_real($value = null)
 /**
  * Formatando um valor real para ser tempo
  * @param   float $value
- * @return  string           
+ * @return  string
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
 function real_to_time($value = null)
 {
-    if( $value === null or $value == null )
-    {
+    if (is_null($value)) {
         return null;
     }
 
@@ -160,7 +157,9 @@ function formatArrayKeysByField($items = array(), $field = 'id')
  * @param   int    $limit number to truncate
  * @return  string
  */
-function truncate($value, $limit)
+function truncate($value, $limit, $start = 0)
 {
-    return rtrim(substr($value, 0, $limit)) . "...";
+    $size = strlen($value);
+
+    return rtrim(substr($value, $start, $limit)) . ($size > $limit ? '...' : null);
 }
