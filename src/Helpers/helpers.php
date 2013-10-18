@@ -161,5 +161,5 @@ function truncate($value, $limit, $start = 0)
 {
     $size = strlen($value);
 
-    return rtrim(substr($value, $start, $limit)) . ($size > $limit ? '...' : null);
+    return rtrim(mb_substr($value, $start, $limit, 'UTF-8')) . ($size > $limit ? '...' : null);
 }
