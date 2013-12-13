@@ -9,7 +9,7 @@ Install via [Composer](https://packagist.org/packages/escapework/laravelhelpers)
 ```javascript
 {
     "require": {
-        "escapework/laravelhelpers": "0.5.*"
+        "escapework/laravelhelpers": "0.6.*"
     }
 }
 ```
