@@ -3,19 +3,6 @@
  * Funções para otimizar códigos no Laravel
  */
 
-
-/**
- * Escrevendo valor de $value em um var_dump
- * @param  mixed $value valor a ser dumpado
- * @return void
- * @author  Eduardo Kasper <eduardo@escape.ppg.br>
- */
-function d($value)
-{
-    echo "<pre>";
-    var_dump($value);
-}
-
 /**
  * Retornando timestamp a partir do formato em $formatFrom
  * @param  string $timestamp  timestamp não formatado
