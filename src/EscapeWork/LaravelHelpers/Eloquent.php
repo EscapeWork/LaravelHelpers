@@ -117,7 +117,8 @@ abstract class Eloquent extends Model
             array_walk($arrRules, function(&$item)
             {
                 foreach ($this->validationReplacedValues as $key) {
-                    $value = $this->$key;
+                    $keyFormated = str_replace(':', '', $key);
+                    $value       = $this->$keyFormated;
 
                     $item = stripos($item, $key) !== false ? str_ireplace($key, $value, $item) : $item;
                 }

@@ -73,9 +73,11 @@ class EloquentTest extends PHPUnit_Framework_TestCase
     {
         $rules                              = array('title' => array('required', 'unique:users,email,:id:,company_id,:company_id:'));
         $eloquent                           = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', array([], new \stdClass));
+        $eloquent->id                       = 10;
+        $eloquent->company_id               = 1991;
         $eloquent->validationReplacedValues = array(':id:', ':company_id:');
         $rulesFormated                      = $eloquent->processRules($rules);
 
-        $this->assertEquals($rulesFormated, array('title' => array('required', 'unique:users,email,,company_id,')));
+        $this->assertEquals($rulesFormated, array('title' => array('required', 'unique:users,email,10,company_id,1991')));
     }
 }
