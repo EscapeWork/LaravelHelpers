@@ -112,13 +112,15 @@ abstract class Eloquent extends Model
      */
     public function processRules(array $rules = array())
     {
-        array_walk($rules, function(&$arrRules)
+        $model = $this;
+
+        array_walk($rules, function(&$arrRules) use($model)
         {
-            array_walk($arrRules, function(&$item)
+            array_walk($arrRules, function(&$item) use($model)
             {
-                foreach ($this->validationReplacedValues as $key) {
+                foreach ($model->validationReplacedValues as $key) {
                     $keyFormated = str_replace(':', '', $key);
-                    $value       = $this->$keyFormated;
+                    $value       = $model->$keyFormated;
 
                     $item = stripos($item, $key) !== false ? str_ireplace($key, $value, $item) : $item;
                 }
