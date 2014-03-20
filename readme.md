@@ -62,13 +62,20 @@ class User extends Eloquent
 {
 
     public static $validationRules = array(
-        'title' => array('required')
+        'title' => array('required'),
+        'email' => array('required', 'email', 'unique:users,email,:id:')
     );
 
     public static $validationMessages = array(
-        'title.required' => 'O título é obrigatório'
+        'title.required' => 'The title is mandatory'
     );
 }
+```
+
+The `:id:` string will be replaced by the `$user->id` field. If you wish to add more replaced fields, you can overwrite the replaced strings in validation tules, by changing the `validationReplacedValues` array.
+
+```
+    public $validationReplacedValues = array(':id:', ':company_id:');
 ```
 
 And you can validate your models just calling the `validate()` method.

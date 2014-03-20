@@ -17,7 +17,6 @@ class EloquentTest extends PHPUnit_Framework_TestCase
         $validatorFactory = m::mock('ValidatorFactory');
         $validatorFactory->shouldReceive('make')->once()->with(array(), array(), array())->andReturn($validator);
 
-
         $eloquent = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', array(array(), $validatorFactory));
         $this->assertTrue($eloquent->validate(array()));
     }
@@ -36,7 +35,6 @@ class EloquentTest extends PHPUnit_Framework_TestCase
 
         $validatorFactory = m::mock('ValidatorFactory');
         $validatorFactory->shouldReceive('make')->once()->with(array(), array(), array())->andReturn($validator);
-
 
         $eloquent = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', array(array(), $validatorFactory));
         $this->assertFalse($eloquent->validate(array()));
@@ -66,5 +64,18 @@ class EloquentTest extends PHPUnit_Framework_TestCase
         $eloquent->shouldReceive('first')->once()->withNoArgs()->andReturn(false);
 
         $this->assertEquals($eloquent, $eloquent->findOrFailBy('slug', 'codeigniter'));
+    }
+
+    /**
+     * @testdox EscapeWork\LaravelHelpers\Eloquent::processRules
+     */
+    public function test_process_rules()
+    {
+        $rules                              = array('title' => array('required', 'unique:users,email,:id:,company_id,:company_id:'));
+        $eloquent                           = $this->getMockForAbstractClass('EscapeWork\LaravelHelpers\Eloquent', array([], new \stdClass));
+        $eloquent->validationReplacedValues = array(':id:', ':company_id:');
+        $rulesFormated                      = $eloquent->processRules($rules);
+
+        $this->assertEquals($rulesFormated, array('title' => array('required', 'unique:users,email,,company_id,')));
     }
 }

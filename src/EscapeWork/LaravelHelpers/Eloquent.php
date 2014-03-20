@@ -64,6 +64,13 @@ abstract class Eloquent extends Model
     protected $validator;
 
     /**
+     * The replaced patterns
+     *
+     * @var array
+     */
+    public $validationReplacedValues = array(':id:');
+
+    /**
      * Create a new instance.
      *
      * @param  array  $attributes
@@ -103,15 +110,17 @@ abstract class Eloquent extends Model
      * @param  array  $rules
      * @return array  $rules
      */
-    protected function processRules($rules = array())
+    public function processRules(array $rules = array())
     {
-        $id = $this->getKey();
-
-        array_walk($rules, function(&$arrRules) use ($id)
+        array_walk($rules, function(&$arrRules)
         {
-            array_walk($arrRules, function(&$item) use ($id)
+            array_walk($arrRules, function(&$item)
             {
-                $item = stripos($item, ':id:') !== false ? str_ireplace(':id:', $id, $item) : $item;
+                foreach ($this->validationReplacedValues as $key) {
+                    $value = $this->$key;
+
+                    $item = stripos($item, $key) !== false ? str_ireplace($key, $value, $item) : $item;
+                }
             });
         });
 
