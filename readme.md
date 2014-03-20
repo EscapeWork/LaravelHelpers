@@ -76,6 +76,10 @@ The `:id:` string will be replaced by the `$user->id` field. If you wish to add 
 
 ```
     public $validationReplacedValues = array(':id:', ':company_id:');
+
+    public static $validationRules = array(
+        'email' => array('required', 'email', 'unique:users,email,:id:,id,company_id,:company_id:')
+    );
 ```
 
 And you can validate your models just calling the `validate()` method.
