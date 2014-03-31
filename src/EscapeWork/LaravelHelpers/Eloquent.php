@@ -234,4 +234,9 @@ abstract class Eloquent extends Model
 
         throw new ModelNotFoundException();
     }
+
+    public function setAttribute($key, $value)
+    {
+        parent::setAttribute($key, $value === '' ? null : $value);
+    }
 }
