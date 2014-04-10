@@ -12,18 +12,20 @@
  * @return timestamp  formato timestamp aceito no banco
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor = 'Y-m-d H:i')
-{
-    if ($timestamp == null or empty($timestamp)) {
-        return null;
-    }
+if (! function_exists('to_timestamp')) {
+    function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor = 'Y-m-d H:i')
+    {
+        if ($timestamp == null or empty($timestamp)) {
+            return null;
+        }
 
-    $dateTime = DateTime::createFromFormat($formatFrom, $timestamp);
-    if (! $dateTime) {
-        return null;
-    }
+        $dateTime = DateTime::createFromFormat($formatFrom, $timestamp);
+        if (! $dateTime) {
+            return null;
+        }
 
-    return $dateTime->format($formatFor);
+        return $dateTime->format($formatFor);
+    }
 }
 
 
@@ -35,18 +37,19 @@ function to_timestamp($timestamp = null, $formatFrom = 'd/m/Y H:i', $formatFor =
  * @return string           string formatado
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function to_char($datetime, $formatFrom = 'Y-m-d H:i', $formatFor = 'd/m/Y H:i')
-{
-    if ($datetime == null or empty($datetime)) {
-        return null;
+if (! function_exists('to_char')) {
+    function to_char($datetime, $formatFrom = 'Y-m-d H:i', $formatFor = 'd/m/Y H:i')
+    {
+        if ($datetime == null or empty($datetime)) {
+            return null;
+        }
+
+        if (! $dateTime = DateTime::createFromFormat($formatFrom, $datetime)) {
+            return null;
+        }
+
+        return $dateTime->format($formatFor);
     }
-
-    if (! $dateTime = DateTime::createFromFormat($formatFrom, $datetime)) {
-        return null;
-    }
-
-    return $dateTime->format($formatFor);
-
 }
 
 
@@ -57,21 +60,23 @@ function to_char($datetime, $formatFrom = 'Y-m-d H:i', $formatFor = 'd/m/Y H:i')
  * @return real
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function time_to_real($value = null)
-{
-    if (is_null($value)) {
-        return null;
+if (! function_exists('time_to_real')) {
+    function time_to_real($value = null)
+    {
+        if (is_null($value)) {
+            return null;
+        }
+
+        if (strpos($value, ':') === false) {
+            return $value;
+        }
+
+        $value   = explode(':', $value);
+        $hora    = $value[0];
+        $minutos = $value[1];
+
+        return round($hora + $minutos / 60, 2);
     }
-
-    if (strpos($value, ':') === false) {
-        return $value;
-    }
-
-    $value   = explode(':', $value);
-    $hora    = $value[0];
-    $minutos = $value[1];
-
-    return round($hora + $minutos / 60, 2);
 }
 
 
@@ -81,19 +86,21 @@ function time_to_real($value = null)
  * @return  string
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function real_to_time($value = null)
-{
-    if (is_null($value)) {
-        return null;
+if (! function_exists('real_to_time')) {
+    function real_to_time($value = null)
+    {
+        if (is_null($value)) {
+            return null;
+        }
+
+        $hora = intval($value);
+        $hora = $hora < 10 ? '0' . $hora : $hora;
+
+        $minuto = round(($value - $hora) * 60);
+        $minuto = $minuto < 10 ? '0' . $minuto : $minuto;
+
+        return $hora . ':' . $minuto;
     }
-
-    $hora = intval($value);
-    $hora = $hora < 10 ? '0' . $hora : $hora;
-
-    $minuto = round(($value - $hora) * 60);
-    $minuto = $minuto < 10 ? '0' . $minuto : $minuto;
-
-    return $hora . ':' . $minuto;
 }
 
 
@@ -106,16 +113,18 @@ function real_to_time($value = null)
  * @return  float
  * @author  Eduardo Kasper <eduardo@escape.ppg.br>
  */
-function char_to_real($char, $dec_point = ',', $thousands_sep = '.')
-{
-    if ($char == null or empty($char)) {
-        return null;
+if (! function_exists('char_to_real')) {
+    function char_to_real($char, $dec_point = ',', $thousands_sep = '.')
+    {
+        if ($char == null or empty($char)) {
+            return null;
+        }
+
+        $char = str_replace($thousands_sep, null, $char);
+        $char = str_replace($dec_point, '.', $char);
+
+        return (float) $char;
     }
-
-    $char = str_replace($thousands_sep, null, $char);
-    $char = str_replace($dec_point, '.', $char);
-
-    return (float) $char;
 }
 
 /**
@@ -125,15 +134,17 @@ function char_to_real($char, $dec_point = ',', $thousands_sep = '.')
  * @param   string $key [default=id]
  * @return  array
  */
-function formatArrayKeysByField($items = array(), $field = 'id')
-{
-    $newArray = array();
+if (! function_exists('formatArrayKeysByField')) {
+    function formatArrayKeysByField($items = array(), $field = 'id')
+    {
+        $newArray = array();
 
-    foreach ($items as $item) {
-        $newArray[$item[$field]] = $item;
+        foreach ($items as $item) {
+            $newArray[$item[$field]] = $item;
+        }
+
+        return $newArray;
     }
-
-    return $newArray;
 }
 
 
@@ -144,9 +155,11 @@ function formatArrayKeysByField($items = array(), $field = 'id')
  * @param   int    $limit number to truncate
  * @return  string
  */
-function truncate($value, $limit, $start = 0)
-{
-    $size = strlen($value);
+if (! function_exists('truncate')) {
+    function truncate($value, $limit, $start = 0)
+    {
+        $size = strlen($value);
 
-    return rtrim(mb_substr($value, $start, $limit, 'UTF-8')) . ($size > $limit ? '...' : null);
+        return rtrim(mb_substr($value, $start, $limit, 'UTF-8')) . ($size > $limit ? '...' : null);
+    }
 }
