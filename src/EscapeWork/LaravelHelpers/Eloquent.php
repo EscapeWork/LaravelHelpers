@@ -239,4 +239,14 @@ abstract class Eloquent extends Model
     {
         parent::setAttribute($key, $value === '' ? null : $value);
     }
+
+    public static function seed($data)
+    {
+        if (! $model = static::find($data['id'])) {
+            $model = new static;
+        }
+
+        $model->fill($data);
+        $model->save();
+    }
 }
