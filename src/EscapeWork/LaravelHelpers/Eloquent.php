@@ -242,7 +242,7 @@ abstract class Eloquent extends Model
 
     public static function seed($data)
     {
-        if (! $model = static::find($data['id'])) {
+        if (! isset($data['id']) || ! $model = static::find($data['id'])) {
             $model = new static;
         }
 
