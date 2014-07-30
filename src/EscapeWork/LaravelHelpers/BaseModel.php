@@ -1,10 +1,11 @@
 <?php namespace EscapeWork\LaravelHelpers;
 
+use EscapeWork\LaravelHelpers\BaseCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 
-abstract class Eloquent extends Model
+abstract class BaseModel extends Model
 {
 
     /**
@@ -20,13 +21,6 @@ abstract class Eloquent extends Model
      * @var array
      */
     public static $validationMessages = array();
-
-    /**
-     * Validation set os messages when fails
-     *
-     * @var array
-     */
-    public static $messages = array();
 
      /**
      * The message bag
@@ -96,7 +90,6 @@ abstract class Eloquent extends Model
 
         if ($this->validator->fails()) {
             $this->messageBag = $this->validator->messages();
-            static::$messages = $this->messageBag->getMessages();
 
             return false;
         }
@@ -248,5 +241,10 @@ abstract class Eloquent extends Model
 
         $model->fill($data);
         $model->save();
+    }
+
+    public function newCollection(array $models = array())
+    {
+        return new BaseCollection($models);
     }
 }
