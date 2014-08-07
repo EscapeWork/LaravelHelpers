@@ -1,5 +1,8 @@
 <?php namespace EscapeWork\LaravelHelpers;
 
+use Illuminate\Support\MessageBag;
+use App;
+
 abstract class BaseRepository
 {
 
@@ -9,6 +12,25 @@ abstract class BaseRepository
      * @var  Illuminate\Database\Eloquent\Model
      */
     protected $model;
+
+    /**
+     * The message bag
+     *
+     * @var Illuminate\Support\MessageBag
+     */
+    protected $messageBag;
+
+    /**
+     * The validator
+     */
+    protected $validator;
+
+    /**
+     * The replaced patterns
+     *
+     * @var array
+     */
+    public $validationReplacedValues = array(':id:');
 
     /**
      * Set hte model instance
@@ -52,9 +74,53 @@ abstract class BaseRepository
     /**
      * @return Illuminate\Support\MessageBag
      */
-    public function getValidationErrors()
+    public function messages()
     {
-        return $this->model->messageBag;
+        return $this->messageBag;
+    }
+
+    public function addMessage($key, $message)
+    {
+        if (! $this->messageBag) {
+            $this->messageBag = new MessageBag;
+        }
+
+        $this->messageBag->add($key, $message);
+    }
+
+    public function validate()
+    {
+        $validator       = App::make('validator');
+        $rules           = $this->processRules($this->model->validationRules);
+        $this->validator = $validator->make($this->model->toArray(), $rules, $this->model->validationMessages);
+
+        if ($this->validator->fails()) {
+            $this->messageBag = $this->messageBag ? $this->messageBag->merge($this->validator->messages()) : $this->validator->messages();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public function processRules(array $rules = array())
+    {
+        $model = $this;
+
+        array_walk($rules, function(&$arrRules) use($model)
+        {
+            array_walk($arrRules, function(&$item) use($model)
+            {
+                foreach ($model->validationReplacedValues as $key) {
+                    $keyFormated = str_replace(':', '', $key);
+                    $value       = $model->$keyFormated;
+
+                    $item = stripos($item, $key) !== false ? str_ireplace($key, $value, $item) : $item;
+                }
+            });
+        });
+
+        return $rules;
     }
 
     public function __get($key)

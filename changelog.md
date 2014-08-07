@@ -1,22 +1,9 @@
-### 0.2.3
+### 0.7.*
 
-- Removido pré condição de ser um array da função `formatArrayKeysByField`;
-
-### 0.2.2
-
-- Adicionada a função `formatArrayKeysByField`;
-
-### 0.2.1 
-
-- Adicionada attributo `$sluggable`, onde é montando o slug automáticamente nas funções `save` e `delete`;
-
-### 0.2
-
-- Função `setFields` utiliza o array `Eloquent::$fillable` ao invés do array `$fields`, que não era nativo do Eloquent;
-
-### 0.1
-
-- Função `EscapeWork\LaravelHelpers\Eloquent\validate()`;
-- Função `EscapeWork\LaravelHelpers\Eloquent\getDataFromArray()`;
-- Atributos `EscapeWork\LaravelHelpers\Eloquent\$validationRules`, `EscapeWork\LaravelHelpers\Eloquent\$validationMessages`, `EscapeWork\LaravelHelpers\Eloquent\$messages`;
-- Função `EscapeWork\LaravelHelpers\Eloquent\HTMLOptions()`;
+- Renamed `EscapeWork\LaravelHelpers\Eloquent` to `EscapeWork\LaravelHelpers\BaseModel`;
+- Renamed the `getValidationErrors` function to `messages`;
+- Added `EscapeWork\LaravelHelpers\BaseCollection`;
+- Added `EscapeWork\LaravelHelpers\BaseRepository`;
+- Removed `BaseModel::$validationRules` and `BaseModel::$validationMessages`. Now, the proprieties are called `$rules` and `$messages`, and aren't static;
+- Passed the `validate()` method to the `BaseRepository` field;
+- Added the function `BaseModel::_setDateAttribute(field, value, format)` to set a date attribute. This transform the attribute in a Carbon object;
