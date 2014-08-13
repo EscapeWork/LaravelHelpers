@@ -4,6 +4,7 @@ use EscapeWork\LaravelHelpers\BaseCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use InvalidArgumentException;
 
 abstract class BaseModel extends Model
