@@ -35,7 +35,7 @@ abstract class BaseRepository
     /**
      * Set hte model instance
      */
-    public function setModel(Model $model)
+    public function setModel($model)
     {
         $this->model = $model;
         return $this;
