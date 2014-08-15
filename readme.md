@@ -14,21 +14,18 @@ Install via [Composer](https://packagist.org/packages/escapework/laravelhelpers)
 }
 ```
 
-### Configuration
-
-Change the `Eloquent` alias to `EscapeWork\LaravelHelpers\Eloquent`;
-
-***
-
 ### Slugs
 
-If you need to make an slug for your model, just set the `$sluggable` as true.
+If you need to make an slug for your model, just use the `SluggableTrait`;
 
 ```php
-class Product extends Eloquent
+use EscapeWork\LaravelHelpers\BaseModel;
+use EscapeWork\LaravelHelpers\SluggableTrait;
+
+class Product extends BaseModel
 {
 
-    protected $sluggable = true;
+    use SluggableTrait;
 }
 ```
 
@@ -39,6 +36,14 @@ The default slug is made by the attribute `title`. But if you have a diferent at
 ```php
 protected $sluggableAttr = 'name';
 ```
+
+If you don't want the slug to change when updating your model, set the `$makeSlugOnUpdate` attribute on your model.
+
+```php
+    protected $makeSlugOnUpdate = false;
+```
+
+And the, just use in the regular way your model:
 
 ```php
     public function store()
