@@ -9,8 +9,22 @@ Install via [Composer](https://packagist.org/packages/escapework/laravelhelpers)
 ```javascript
 {
     "require": {
-        "escapework/laravelhelpers": "0.6.*"
+        "escapework/laravelhelpers": "0.7.*"
     }
+}
+```
+
+### Models
+
+To make use of the best things in LaravelHelpers, please make sure all your models extends the `BaseModel` class.
+
+```
+use EscapeWork\LaravelHelpers\BaseModel;
+
+class Product extends BaseModel
+{
+
+    // ...
 }
 ```
 
@@ -56,7 +70,29 @@ And the, just use in the regular way your model:
 }
 ```
 
+### Combobox
+
+LaravelHelpers have a method for make combobox easier when using with the `Form` class.
+
+```
+Form::select('product_id', Product::all()->combobox());
+```
+
+The default attribute for the option text is the `title` attribute. In case you need other field, just use like this:
+
+```
+Form::select('client_id', Client::all()->combobox(['field' => 'name']); // for using the 'name' field
+```
+
+If you want to create an 'empty' option, you can use like this:
+
+```
+Form::select('client_id', Client::all()->combobox(['field' => 'name', 'empty_option' => true, 'empty_option_label' => 'Select a client']));
+```
+
 ***
+
+The documentation below this line is for the version `0.6`, so not everything is the same for now.
 
 ### Validations
 
@@ -66,12 +102,12 @@ Just set the `$validationRules` and `$validationMessages` in your model, then ca
 class User extends Eloquent
 {
 
-    public static $validationRules = array(
+    public $validationRules = array(
         'title' => array('required'),
         'email' => array('required', 'email', 'unique:users,email,:id:')
     );
 
-    public static $validationMessages = array(
+    public $validationMessages = array(
         'title.required' => 'The title is mandatory'
     );
 }
@@ -85,48 +121,6 @@ The `:id:` string will be replaced by the `$user->id` field. If you wish to add 
     public static $validationRules = array(
         'email' => array('required', 'email', 'unique:users,email,:id:,id,company_id,:company_id:')
     );
-```
-
-And you can validate your models just calling the `validate()` method.
-
-```php
-class UserTest extends TestCase
-{
-
-    public function testValidate()
-    {
-        $user = new User();
-        $user->fill(['title' => 'Testing']);
-
-        $this->assertTrue($user->validate());
-    }
-}
-```
-
-If your validation fails, error messages will be set in the static variable `$messages` as an array.
-
-```php
-    dd(User::$messages);
-```
-
-Case you wish the Laravel `MessageBag` object, you can access in the attribute `$messageBag`.
-
-```php
-    $user->messageBag
-```
-
-***
-
-### HTML Options
-
-```php
-<select name="user_id">
-    {{ $user->HTMLOptions() }}
-</select>
-
-<select>
-    {{ $user->HTMLOptions(2, 'name', User::getAdministrators()) }}
-</select>
 ```
 
 ***
