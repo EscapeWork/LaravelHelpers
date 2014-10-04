@@ -55,7 +55,7 @@ abstract class BaseModel extends Model
 
     public static function seed($data)
     {
-        if (! isset($data['id']) || ! $model = static::withTrashed->find($data['id'])) {
+        if (! isset($data['id']) || ! $model = static::withTrashed()->find($data['id'])) {
             $model = new static;
         }
 

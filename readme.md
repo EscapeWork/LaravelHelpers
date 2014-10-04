@@ -94,42 +94,13 @@ Form::select('client_id', Client::all()->combobox(['field' => 'name', 'empty_opt
 
 The documentation below this line is for the version `0.6`, so not everything is the same for now.
 
-### Validations
-
-Just set the `$validationRules` and `$validationMessages` in your model, then call `$model->validate()`.
-
-```php
-class User extends Eloquent
-{
-
-    public $validationRules = array(
-        'title' => array('required'),
-        'email' => array('required', 'email', 'unique:users,email,:id:')
-    );
-
-    public $validationMessages = array(
-        'title.required' => 'The title is mandatory'
-    );
-}
-```
-
-The `:id:` string will be replaced by the `$user->id` field. If you wish to add more replaced fields, you can overwrite the replaced strings in validation tules, by changing the `validationReplacedValues` array.
-
-```
-    public $validationReplacedValues = array(':id:', ':company_id:');
-
-    public static $validationRules = array(
-        'email' => array('required', 'email', 'unique:users,email,:id:,id,company_id,:company_id:')
-    );
-```
-
-***
-
 ### Find or Fail By
 
 ```php
-$product = new Product();
-$product = $product->findOrFailBy('slug', 'office-chair');
+$product = App::make('ProductRepository');
+$product->findOrFailBy('slug', 'office-chair');
+
+dd($product->title);
 ```
 
 If the product was not found, then a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown, like the Eloquent function `findOrFail`.
