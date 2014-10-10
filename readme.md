@@ -18,7 +18,7 @@ Install via [Composer](https://packagist.org/packages/escapework/laravelhelpers)
 
 To make use of the best things in LaravelHelpers, please make sure all your models extends the `BaseModel` class.
 
-```
+```php
 use EscapeWork\LaravelHelpers\BaseModel;
 
 class Product extends BaseModel
@@ -74,19 +74,19 @@ And the, just use in the regular way your model:
 
 LaravelHelpers have a method for make combobox easier when using with the `Form` class.
 
-```
+```php
 Form::select('product_id', Product::all()->combobox());
 ```
 
 The default attribute for the option text is the `title` attribute. In case you need other field, just use like this:
 
-```
+```php
 Form::select('client_id', Client::all()->combobox(['field' => 'name']); // for using the 'name' field
 ```
 
 If you want to create an 'empty' option, you can use like this:
 
-```
+```php
 Form::select('client_id', Client::all()->combobox(['field' => 'name', 'empty_option' => true, 'empty_option_label' => 'Select a client']));
 ```
 
@@ -97,7 +97,7 @@ The documentation below this line is for the version `0.6`, so not everything is
 ### Find or Fail By
 
 ```php
-$product = App::make('ProductRepository');
+$product = App::make('ProductRepository'); // just a sample, you probably will use dependency injection
 $product->findOrFailBy('slug', 'office-chair');
 
 dd($product->title);
