@@ -1,4 +1,4 @@
-# LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers) [![Latest Stable Version](https://poser.pugx.org/escapework/laravelhelpers/v/stable.png)](https://packagist.org/packages/escapework/laravelhelpers) [![Total Downloads](https://poser.pugx.org/escapework/laravelhelpers/downloads.png)](https://packagist.org/packages/escapework/laravelhelpers)
+## LaravelHelpers [![Build Status](https://secure.travis-ci.org/EscapeWork/LaravelHelpers.png)](http://travis-ci.org/EscapeWork/LaravelHelpers) [![Latest Stable Version](https://poser.pugx.org/escapework/laravelhelpers/v/stable.png)](https://packagist.org/packages/escapework/laravelhelpers) [![Total Downloads](https://poser.pugx.org/escapework/laravelhelpers/downloads.png)](https://packagist.org/packages/escapework/laravelhelpers)
 
 A set of tools and helpers to help the [Laravel 4](http://laravel.com) development.
 
@@ -28,7 +28,7 @@ class Product extends BaseModel
 }
 ```
 
-### Slugs
+#### Slugs
 
 If you need to make an slug for your model, just use the `SluggableTrait`;
 
@@ -70,7 +70,21 @@ And the, just use in the regular way your model:
 }
 ```
 
-### Combobox
+#### Search
+
+For search for multiple terms, you can use the `scopeSearch` method.
+
+```php
+$products = $product->search('title', 'this title')->get();
+```
+
+This will convert the SQL too:
+
+```sql
+select * from products where title regexp 'this.+title'
+```
+
+#### Combobox
 
 LaravelHelpers have a method for make combobox easier when using with the `Form` class.
 

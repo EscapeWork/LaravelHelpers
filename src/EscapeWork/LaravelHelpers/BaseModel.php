@@ -36,9 +36,6 @@ abstract class BaseModel extends Model
      */
     protected $makeSlugOnUpdate = true;
 
-    /**
-     * Find or fail by $field
-     */
     public function findOrFailBy($field, $value)
     {
         if ($model = $this->where($field, '=', $value)->first()) {
@@ -46,6 +43,13 @@ abstract class BaseModel extends Model
         }
 
         throw new ModelNotFoundException();
+    }
+
+    public function scopeSearch($query, $field, $value)
+    {
+        $terms = explode(' ', $value);
+
+        return $query->where($field, 'regexp', implode('.+', $terms));
     }
 
     public function setAttribute($key, $value)
