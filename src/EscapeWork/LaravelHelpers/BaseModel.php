@@ -59,8 +59,17 @@ abstract class BaseModel extends Model
 
     public static function seed($data)
     {
-        if (! isset($data['id']) || ! $model = static::withTrashed()->find($data['id'])) {
-            $model = new static;
+        $model  = new static;
+        $traits = class_uses($model);
+
+        if (in_array('Illuminate\Database\Eloquent\SoftDeletingTrait', $traits)) {
+             if ($existing = static::withTrashed()->find($data['id'])) {
+                $model = $existing;
+             }
+        } else {
+            if ($existing = static::find($data['id'])) {
+                $model = $existing;
+             }
         }
 
         $model->fill($data);
