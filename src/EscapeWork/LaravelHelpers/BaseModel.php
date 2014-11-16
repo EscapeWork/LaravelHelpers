@@ -88,6 +88,30 @@ abstract class BaseModel extends Model
         } catch (InvalidArgumentException $e) {
             $this->attributes[$field] = null;
         }
+    }
 
+    public function _setCurrencyAttribute($field, $value, $type = 'BRL')
+    {
+        if ($value == '') {
+            $this->attributes[$field] = null;
+            return;
+        }
+
+        if (is_float($value)) {
+            $this->attributes[$field] = $value;
+            return;
+        }
+
+        switch ($type) {
+            case 'BRL':
+                $value = str_replace('.', '', $value);
+                $value = str_replace(',', '.', $value);
+                break;
+
+            default:
+                $value = floatval($value);
+        }
+
+        $this->attributes[$field] = (float) $value;
     }
 }

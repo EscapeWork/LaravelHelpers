@@ -84,6 +84,53 @@ This will convert the SQL too:
 select * from products where title regexp 'this.+title'
 ```
 
+#### Setters
+
+LaravelHelpers `BaseModel` have two setters method to help you:
+
+##### _setDateAttribute
+
+```php
+// model
+...
+    public function setDateAttribute($date)
+    {
+        $this->_setDateAttribute('date', $date, $format = 'd/m/Y');
+    }
+...
+
+// whaterer place you need
+$model->date = '10/03/1991'; // this format should be the same as the above
+```
+
+If everything goes fine, `$model->date` will be an instance of `Carbon`. Otherwise, `$model->date` will be null.
+
+##### _setCurrencyAttribute
+
+```php
+// model
+...
+    public function setPriceBRLAttribute($price)
+    {
+        $this->_setCurrencyAttribute('priceBRL', $price);
+    }
+
+    public function setPriceAttribute($price)
+    {
+        $this->_setCurrencyAttribute('price', $price, 'USD');
+    }
+...
+
+// whaterer place you need
+$model->priceBRL = '10,90';
+$model->price    = '10.90';
+
+var_dump($model->priceBRL); // (float) 10.90';
+var_dump($model->price);    // (float) 10.90';
+```
+
+If everything goes fine, a `float` value will be setted. Otherwise, the value will be null.
+
 #### Combobox
 
 LaravelHelpers have a method for make combobox easier when using with the `Form` class.
