@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: EscapeWork\LaravelHelpers
+        psr4_prefix: EscapeWork\LaravelHelpers
