@@ -24,7 +24,7 @@ class BaseCollection extends Collection
         }
 
         foreach ($this->items as $item) {
-            $data[$item->id] = $item->$options['field'];
+            $data[$item->{$item->getKeyName()}] = $item->$options['field'];
         }
 
         return $data;
